@@ -1,1 +1,181 @@
 \chapter{Estado del Arte}\label{chapter:state-of-the-art}
+
+    Hasta hoy considerado como el punto de referencia y texto más completo en el campo de GLN(\cite{Gatt2018SurveyOT}), el libro de Ehud Riter y
+Robert Dale: Building Natural Language Generation Systems(~\cite{reiter_dale_2000}), sienta las bases y define las que se han asumido como tareas principales 
+de un sistema de GLN:
+
+\begin{itemize}
+    \item Determinación del contenido: decidir qué información es relevaante.
+    \item Estructuración del texto: determinar en qué orden se presentará la información.
+    \item Agregación: decidir qué información se presenta en cada oración.
+    \item Lexicalización: encontrar las palabras y frases adecuadas para expresar información.
+    \item Generación de expresiones de referencia: selección de las palabras y frases para identificar entidades del dominio.
+    \item Realización lingüística: confomación del texto con oraciones bien formadas.
+\end{itemize}
+
+Cada una de estas tareas presenta un objetivo dentro del sistema y existen distintas técnias para su realización.
+    
+\section{Determinación del contenido}
+
+    Cada sistema GLN tiene un objetivo comunicativo, lo cual hace necesario determinar que información del dominio es relevante y debe 
+estar representada en el texto final(\cite{reiter_dale_2000}). Los sistemas pueden presentar una especificación de los datos de la entrada 
+o seleccionar un subconunto de los mismos(\cite{reiter_dale_2000}).
+
+    El receonocimiento de patrones es una de las t\'ecnicas utilizadas con este fin.  SumTime-Turbine(~\cite{Yu2006ChoosingTC}) es un sistema funcional para crear
+ informes sobre un mecanismo de turbinas de gas. En un contexto donde la cantidad de datos en muy grande y en su mayoría irrelevante, 
+ los autores con ayuda de los expertos del dominio crean un modelo que permite reconocer patrones en los datos así como luego, utilizando una base de datos de patrones 
+antiguos determinar los patrones relevantes a ser expresados en el informe. 
+
+    Existen muchos sistemas de GLN que utilizan modelos basados en reglas como \'unica metodolog\'ia para la selecci\'on de contenido(~\cite{reiter_dale_2000,Perera2017RecentAI}). Bouayad-Agha, Casamayor y 
+Wanner (~\cite{BouayadAgha2011ContentSF}) en su trabajo presentaron el dise\~no te\'orico de un sistema para generar resumenes de partidos de 
+futbol de la Liga Espa\~nola. Para la conformaci\'on del mismo describieron la construcci\'on de una garn base de conociminetos del dominio as\'i como 
+un estricto sistema de reglas para la selecci\'on de contenido. Es relevante este enfoque ya que con un conocimiento del dominio a tratar y de la intenci\'on comunicativa del texto a producir 
+es posible implementar reglas que den lugar a la selección del contenido relevante(~\cite{Reiter1997BuildingAN,reiter_dale_2000}). 
+
+    Como el proceso de creaci\'on de reglas puede ser tedioso y es dependiente del dominio(~\cite{Reiter1997BuildingAN}) aparecieron iniciativas que para la automatizaci\'on de esta tarea. Un enfoque 
+basado en t\'ecnicas de aprendizaje autom\'atico es el presentado por Dubou\'e y McKeown(~\cite{Dubou2003StatisticalAO}). En este trabajo plantearon un modelo de aprendizaje supervisado que a trav\'es de
+un corpus de resultados deseados(texto escrito por humanos) aparejados con los tipos lingüísticos de la entrada(distintos tipos de datos que recibe el sistema) determina un conjunto de constantes. Estas constantes 
+expresan si determinado dato de entrada debe aparecer o no reflejado en la salida y bajo que condiciones. Este sistema se utilizó para la generación de descripciones biográficos cortas que resumirán hechos 
+importantes sobre personajes famosos.
+
+\section{Estructuración del texto}
+
+    La estructuración del texto o planificación del discurso es el proceso donde se da orden y estructura al conjunto de mensajes a expresar en el texto producido. En un texto la información se presenta en un orden particular 
+y, por lo general, hay una estructura subyacente a la presentación. La complejidad de la estructura de los textos puede variar de un sistema a otro. Una buena estructuración puede hacer que un texto sea mucho más fácil 
+de leer(~\cite{Reiter1997BuildingAN}).
+
+    Los primeros enfoques para la estructuración de documento se basaron en reglas estructuradas hechas a mano dependientes del dominio(~\cite{Gatt2018SurveyOT}). A este enfoque se le conoce como el enfoque basado en esquemas, nombre que 
+se deriv\'o del trabajo de Kathleen R. McKeown(~\cite{mckeown1985discourse}) cuando acu\~n\'o el t\'ermino \textit{"schematta"}. En la construcci\'on de su sitema TEXT(~\cite{mckeown1985discourse}), McKeown, luego del an\'alis de muchos 
+ejemplos del dominio, concluyó que dado un objetivo comunicativo, la información tiende a transmitirse en el mismo orden. En base a esto defini\'o estructuras(esquemas) que determinan posibles combinaciones de atributos, formando patrones 
+y plantillas. De esta forma el sistema, dada una intenci\'on comunicativa, puede seleccionar un esquema que defina la forma de transmitir la información. La mayor\'ia de los sitemas que siguen este enfoque utilizan 
+las Matrices de Valores de Atributos(AVMs por sus siglas en inglés, Attribute Value Matrics)(~\cite{Perera2017RecentAI}).
+
+    Las estructuras ret\'oicas son otro de los mecanismos que se utilizan para la planificación. Estas se derivan del trabajo de Mann y Thompson quienes introdujeron la Teor\'ia de la Estructura Ret\'orica(RST por
+sus siglas en inglés, Rhetorical Structure Theory)(~\cite{mann1988rhetorical}). Las estructuras ret\'oricas constituyen un m\'etodo lingüístico para la descripci\'on de texto caracterizando las estructuras primarias del mismo y estableciendo 
+relaciones funcionales entre sus distintas partes. La RST tiene como base los conceptos de n\'ucleo y sat\'elite que definen las partes del texto entre las que se estable un relaci\'on. Los distintos sistemas que utilizan las estructuras ret\'oricas 
+para la estructuraci\'on del texto definen que tipo de relaciones establecen. Ejemplo de relaciones lingüísticas planteadas por Mann y Thompson en su trabajo son: motivaci\'on, causa, condici\'on, cirscuntancia, etc(~\cite{mann1988rhetorical}). 
+
+\section{Agregación}
+
+    En un texto, cada parte de información no tiene que estar presente en oraciones independientes. Hay escenarios donde es 
+deseable que distintos mensajes sean transmitidos en una misma oraci\'on. La agreagaci\'on puede permitir crear texto de mayor 
+calidad o eliminar repeticiones inncesarias que vayan en contra de la fluidez del texto(\cite{Gatt2018SurveyOT}).
+    Un ejemplo de agregaci\'on, en el dominio del f\'utbol, describiendo el hecho de dos anotaciones consecutivas de un jugador, puediera ser:
+
+\begin{itemize}
+    \item (1) Ronaldo anot\'o para el Real Madrid en el minuto 2. Ronaldo anot\'o para el Real Madrid en el minuto 8.
+    \item (2) Ronaldo anot\'o dos veces para el Real Madrid antes del minuto 8.
+\end{itemize}
+
+    En (2) se evita la repetici\'on y la información se presenta de forma m\'as fluida y natural al lector.
+    
+    Reape y Mellish(~\cite{reape1999just}) realizaron un estudio sobre la tarea de agregación dentro de los sitemas de generación 
+de texto, distinguiendo entre la agregación a nivel semántico(más dependiente del dominio) y a nivel sintáctico. Muchos de los primeros 
+trabajos sobre agregación fueron dependientes del dominio, centrados en la aplicación de reglas(por ejemplo, 
+"si un jugador marca dos goles consecutivos, expr\'esalo en la misma frase') generalmente hechas a mano(ejemplo ~\cite{Shaw1998ClauseAU}). 
+Con el tiempo aparecieron propuestas que utilizan enfoques de aprendizaje autom\'atico. SPoT es un sistema que se present\'o en ~\cite{walker2001spot}) 
+contituendo uno de los primeros sistemas entrenados que incluye la tarea de agregación. Los autores plantearon una metodolog\'ia basada en la producci\'on 
+de varios textos para una misma entidad informativa utilizando diferentes cl\'ausulas de agregación asociadas al dominio. Despu\'es utilizaron un modelo 
+entrenado para dar un valor a cada una de las salidas estableciendo un ranking a partir del cual hacer la selección. Mientras, Barzilay y Lapata(~\cite{Barzilay2006AggregationVS})
+plantearon el problema en términos de optimización global. Realizan una clasificación inicial sobre pares de entradas de la base de datos que determina 
+si deben agregarse o no en función de su similitud por pares. Posteriormente, seleccionan un conjunto globalmente óptimo de entradas relacionadas en función
+de un grupo de restricciones.
+
+    Con la agregación sintáctica, podría decirse que es más factible definir reglas independientes del dominio para eliminar la 
+redundancia(~\cite{Gatt2018SurveyOT}). Por ejemplo, convertir (3) en (4) a continuación
+
+\begin{itemize}
+    \item (3) Ronaldo marcó en el minuto 2 y marcó de nuevo en el minuto 8.
+    \item (4) Ronaldo marcó en el minuto 2 y de nuevo en el 8.
+\end{itemize}
+    
+podría lograrse identificando las frases verbales paralelas en las dos oraciones conjuntas y eliminando el sujeto y el verbo en la segunda.
+
+\section{Lexicalización}
+
+    La lexicalización es un proceso muy importante dentro de un sitema de GLN. Es el proceso durante el cual se 
+seleccionan la palabra o palabras que expresan un concepto o relaci\'on(~\cite{Reiter1997BuildingAN}). Una de las 
+complicaciones del proceso de lexicalización est\'a dada porque una misma relación puede ser expresada de 
+distintas formas. Por ejemplo, el evento de la anotación de un gol en un partido de fútbol puede ser expresado como:
+¨marcar un gol¨, ¨poner el balón en la red¨, ¨conseguir una anotación¨. La complejidad de este proceso depende en gran 
+medida del número de alternativas que el sistema pueda o quiera contemplar. Las restricciones contextuales también juegan 
+un papel importante a la hora de expresar un mensaje, por ejemplo, la expresion ¨marcó un gol¨ es desafortunada si el evento 
+descrito es un gol en propia puerta(~\cite{Gatt2018SurveyOT}).
+
+    El proceoso de lexicalización puede seguir dos vertientes principales. Una ser\'ia la realizaci\'on de la  
+lexicalización de la forma m\'as simple posible, lo cual se lleva a cabo generalemente utilizando t\'ecnicas para el llenado de 
+plantillas lexicalizadas. De otra forma se puede realizar este proceso en mayor profundidad utilizando t\'ecnicas m\'as complejas  
+que permmitan por ejemplo: la eliminaci\'on de palabras innecesarias, la selección de vacablos que maximicen la efectividad del obetivo 
+comunicativo del texto, la uni\'on de t\'erminos que se aparejan frecuentemente en el dominio(~\cite{Perera2017RecentAI}).
+
+    Los enfoques basados en reglas son de los m\'as utilizados, pudiedo variar en complejidad entre un sistema y otro. \textit{EasyText}(~\cite{danlos2011easytext}) 
+es un ejemplo de sistema que utiliza reglas para la lexicalización pero que da un paso m\'as all\'a ya que consume de una base de datos 
+l\'exica creada principalmente por lingüístas. Esta alternativa permite una lexicalización m\'as avanzada pero a su vez es altamente 
+costosa en recursos.
+
+    La utilizaci\'on de ontolog\'ias tambi\'en est\'a presente en este proceso de los sistemas de GLN. El uso de ontologías permite 
+al sistema ganar en adaptabilidad ya que encontrar una ontología para un dominio determinado es más sencillo que encontrar un corpues para 
+el mismo. Así mismo ofrecen una mayor cobertura de las representaciones semánticas que los corpus(~\cite{Perera2017RecentAI}). En ~\cite{cimiano2013exploiting} introducen 
+un modelo que utiliza este enfoque presentado en el dominio de las recetas de cocina.
+
+
+\section{Expresiones de referencia}
+
+    Robert Dale y Ehud Rither describieron la generación de expresiones de referencias dentro de un sitema de GLN como la tarea de 
+indentificar la expresión, comprensible de cara al usuario, a utilizar para indetificar a una instancia del dominio(~\cite{reiter_dale_2000,Gatt2018SurveyOT}). 
+Los primeros m\'etodos para la selección de referencias fueron los algoritmos generativos que en común presentan la necesidad de tener conocimiento 
+contextual y de propiedades de las entidades(~\cite{Gatt2018SurveyOT}). De este orden es el algoritmo incremental cuya base se plant\'o en ~\cite{dale1995computational}. 
+El algoritmo, en base a conocer la entidad a referenciar(objetivo), el resto de entidades(llamadas distractores) y el grupo de propiedades que definen entidandes en el dominio,
+busca determinar un conjunto de propiedades \'unicas que definan al objetivo y lo diferencien del resto.
+
+    Muchos de los trabajos que versan sobre este tema hacen énfasis en un tipo determinado de referencia(~\cite{ferreira2018neuralreg}). La selección 
+puede ser de un pronombre(\'el/ella), una descripci\'on( Sim\'on, el jugador cubano) o en la generación de nombres propios(Frederich Cepeda/Cepeda). 
+Rither y Dale(~\cite{reiter_dale_2000}) plantean una diferencia entre una referencia temprana(primera vez que se menciona una 
+entidad en el texto) y una tard\'ia(cuando se refiera a una entidad mencionada anteriormente). Plantearon el uso de los nombres propios a la hora 
+de introducir una entidad, luego, en base a cla\'usulas seleccionar un pronombre apropiado, ejemplo:
+
+\begin{verbatim}
+    si el referente fue mencionado en la oración anterior;
+    entonces utiliza un pronombre
+\end{verbatim}
+
+a su vez es necesario considerar los escenarios donde la generaci\'on de expresiones de referencia pudiera llevar a ambigüedades:
+
+\begin{itemize}
+    \item Benzema anotó dos para el Real Madrid mientras Luka Modric brindó dos asistencias. Él fue elegido el jugador del partido... 
+\end{itemize}
+
+    En \cite{siddharthan2011information} los autores realizaron un estudio emp\'irico del comportamiento de las referencias hacia parsonas basadas en 
+su nombre propio en el contexto de los art\'iculos de noticias. Para ello utilizaron un corpus de noticias en inglés de diferentes agencias de prensa y 
+cuantificaron las diferentes formas de referencia seg\'un el momento referencial de la instancia(temprana o tard\'ia). Como resultado de este trabajo 
+arrojaron que el nombre completo de la entidad suele utilizarse como primera referencia en la pr\'actica totalidad de los casos mientras que en su mayor\'ia
+el apellido se utiliza cuando se trata de una referencia tard\'ia. 
+
+   %Entre las propuestas recientes para la generaci\'on de entidades referenciales encontramos la presentada en \cite{ferreira2018neuralreg}. Los autores presentan 
+%\textit{NeuralREG}, un modelo de aprendizaje profundo implementado como multi-encoder, attention-decoder con biderectional LSTM(Long-Short Term Memory). Para el 
+%entrenamiento del modelo utilizaron una versi\'on deslexicalizada del corpus \textit{WebNLG} . Cada entidad presente en los datos fue mapeada
+% con diferentes etiquetas de forma tal que 
+
+\section{Realización lingüística}
+
+    El proceso de realizaci\'on lingüística es el que da lugar a la formaci\'on final del texto expresado en oraciones con una 
+estructura gramatical correcta y coherente con el mensaje a transmitir. Esta tarea implica ordenar los constituyentes de una oración, 
+así como generar las formas morfológicas correctas (incluidas las conjugaciones y la concordancia de los verbos). A menudo, los 
+realizadores también necesitan insertar palabras funcionales (como verbos auxiliares y preposiciones) y signos de puntuación(~\cite{Gatt2018SurveyOT}).
+   
+    Una de las t\'ecnicas m\'as utilizadas es la que incluye el uso de plantillas predefinidas para expresar mensajes(\cite{Gatt2018SurveyOT}). Las 
+plantillas, aunque requieren una carga intensiva de trabajo para lograr mayor variabilidad en el texto a producir permiten un control total sobre 
+la calidad y la correctitud del texto a elaborar. Un ejemplo de plantilla:
+
+\begin{verbatim}
+    $equipo_1 venció $pts_equipo_1 a $pts_equipo_2 a $equipo_2
+\end{verbatim}
+
+    Dicha plantilla, que representa el resultado de un enfrentamiento entre dos equipos se completa con la información extraida de los datos y a la hora de 
+la realización el resultado pudiera ser el siguiente:
+
+\begin{verbatim}
+    Industriales venció 10 a 1 a Granma
+\end{verbatim}
+
+
