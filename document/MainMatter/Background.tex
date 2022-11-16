@@ -1,27 +1,30 @@
 \chapter{Estado del Arte}\label{chapter:state-of-the-art}
 
+
+\section{Tareas principales de los sistemas Generación de Lenguaje Natural}
+
     Hasta hoy considerado como el punto de referencia y texto más completo en el campo de GLN(\cite{Gatt2018SurveyOT}), el libro de Ehud Riter y
 Robert Dale: Building Natural Language Generation Systems(~\cite{reiter_dale_2000}), sienta las bases y define las que se han asumido como tareas principales 
 de un sistema de GLN:
 
 \begin{itemize}
-    \item Determinación del contenido: decidir qué información es relevaante.
+    \item Determinación del contenido: decidir qué información es relevante.
     \item Estructuración del texto: determinar en qué orden se presentará la información.
     \item Agregación: decidir qué información se presenta en cada oración.
     \item Lexicalización: encontrar las palabras y frases adecuadas para expresar información.
     \item Generación de expresiones de referencia: selección de las palabras y frases para identificar entidades del dominio.
-    \item Realización lingüística: confomación del texto con oraciones bien formadas.
+    \item Realización lingüística: conformación del texto con oraciones bien formadas.
 \end{itemize}
 
 Cada una de estas tareas presenta un objetivo dentro del sistema y existen distintas técnias para su realización.
     
-\section{Determinación del contenido}
+\subsection{Determinación del contenido}
 
     Cada sistema GLN tiene un objetivo comunicativo, lo cual hace necesario determinar que información del dominio es relevante y debe 
 estar representada en el texto final(\cite{reiter_dale_2000}). Los sistemas pueden presentar una especificación de los datos de la entrada 
 o seleccionar un subconunto de los mismos(\cite{reiter_dale_2000}).
 
-    El receonocimiento de patrones es una de las t\'ecnicas utilizadas con este fin.  SumTime-Turbine(~\cite{Yu2006ChoosingTC}) es un sistema funcional para crear
+    El reconocimiento de patrones es una de las t\'ecnicas utilizadas con este fin.  SumTime-Turbine(~\cite{Yu2006ChoosingTC}) es un sistema funcional para crear
  informes sobre un mecanismo de turbinas de gas. En un contexto donde la cantidad de datos en muy grande y en su mayoría irrelevante, 
  los autores con ayuda de los expertos del dominio crean un modelo que permite reconocer patrones en los datos así como luego, utilizando una base de datos de patrones 
 antiguos determinar los patrones relevantes a ser expresados en el informe. 
@@ -38,7 +41,7 @@ un corpus de resultados deseados(texto escrito por humanos) aparejados con los t
 expresan si determinado dato de entrada debe aparecer o no reflejado en la salida y bajo que condiciones. Este sistema se utilizó para la generación de descripciones biográficos cortas que resumirán hechos 
 importantes sobre personajes famosos.
 
-\section{Estructuración del texto}
+\subsection{Estructuración del texto}
 
     La estructuración del texto o planificación del discurso es el proceso donde se da orden y estructura al conjunto de mensajes a expresar en el texto producido. En un texto la información se presenta en un orden particular 
 y, por lo general, hay una estructura subyacente a la presentación. La complejidad de la estructura de los textos puede variar de un sistema a otro. Una buena estructuración puede hacer que un texto sea mucho más fácil 
@@ -55,7 +58,7 @@ sus siglas en inglés, Rhetorical Structure Theory)(~\cite{mann1988rhetorical}).
 relaciones funcionales entre sus distintas partes. La RST tiene como base los conceptos de n\'ucleo y sat\'elite que definen las partes del texto entre las que se estable un relaci\'on. Los distintos sistemas que utilizan las estructuras ret\'oricas 
 para la estructuraci\'on del texto definen que tipo de relaciones establecen. Ejemplo de relaciones lingüísticas planteadas por Mann y Thompson en su trabajo son: motivaci\'on, causa, condici\'on, cirscuntancia, etc(~\cite{mann1988rhetorical}). 
 
-\section{Agregación}
+\subsection{Agregación}
 
     En un texto, cada parte de información no tiene que estar presente en oraciones independientes. Hay escenarios donde es 
 deseable que distintos mensajes sean transmitidos en una misma oraci\'on. La agreagaci\'on puede permitir crear texto de mayor 
@@ -91,7 +94,7 @@ redundancia(~\cite{Gatt2018SurveyOT}). Por ejemplo, convertir (3) en (4) a conti
     
 podría lograrse identificando las frases verbales paralelas en las dos oraciones conjuntas y eliminando el sujeto y el verbo en la segunda.
 
-\section{Lexicalización}
+\subsection{Lexicalización}
 
     La lexicalización es un proceso muy importante dentro de un sitema de GLN. Es el proceso durante el cual se 
 seleccionan la palabra o palabras que expresan un concepto o relaci\'on(~\cite{Reiter1997BuildingAN}). Una de las 
@@ -119,7 +122,7 @@ el mismo. Así mismo ofrecen una mayor cobertura de las representaciones semánt
 un modelo que utiliza este enfoque presentado en el dominio de las recetas de cocina.
 
 
-\section{Expresiones de referencia}
+\subsection{Expresiones de referencia}
 
     Robert Dale y Ehud Rither describieron la generación de expresiones de referencias dentro de un sitema de GLN como la tarea de 
 indentificar la expresión, comprensible de cara al usuario, a utilizar para indetificar a una instancia del dominio(~\cite{reiter_dale_2000,Gatt2018SurveyOT}). 
@@ -156,7 +159,7 @@ el apellido se utiliza cuando se trata de una referencia tard\'ia.
 %entrenamiento del modelo utilizaron una versi\'on deslexicalizada del corpus \textit{WebNLG} . Cada entidad presente en los datos fue mapeada
 % con diferentes etiquetas de forma tal que 
 
-\section{Realización lingüística}
+\subsection{Realización lingüística}
 
     El proceso de realizaci\'on lingüística es el que da lugar a la formaci\'on final del texto expresado en oraciones con una 
 estructura gramatical correcta y coherente con el mensaje a transmitir. Esta tarea implica ordenar los constituyentes de una oración, 
@@ -178,4 +181,59 @@ la realización el resultado pudiera ser el siguiente:
     Industriales venció 10 a 1 a Granma
 \end{verbatim}
 
+\section{Propuestas neuronales para la generación de texto}
+    Al ingual que en otras áreas del procesamiento de lenguaje natural, el dominio de la GLN se ha visto 
+impactado por el auge de las soluciones basadas en redes neuronales (~\cite{Gatt2018SurveyOT,sharma2022innovations}). 
+Mientras los sistemas tradicionales de D2T siguen una estructura modular con etapas bien definidas (estructuración, relalización, etc), 
+los modelos neuronales variaron el camino hacia estructuaras \emph{end-to-end} (de extremo a extremo, en español), unificando 
+en muchas casos, varias tareas en un solo paso de entrenamiento.
 
+    Los trabajos que siguieron este enfoque (~\cite{lebret-etal-2016-neural,mei2016talk,wiseman-etal-2017-challenges} ) plantearon modelos \emph{Seq2Seq} (de secuencia a secuencia, en español) que adoptan la 
+influyente estructura de codificador-decodificador (~\cite{sutskever2014sequence}). Utilizan una red neuronal recurrente (RNN, \emph{Recurrent Neural Network}, en inglés) 
+para codificar la entrada de un vector de representación el cual sirve a su vez como entrada auxiliar de otra RNN que hace de decodificador y produce el texto, y no tienen módulos 
+específicos para mejorar la calidad del resultado más allá de los mecanismos gen\'ericos de atención y copia (~\cite{bahdanau2014neural,gu2016incorporating}). La popularidad de los módelos 
+\emph{end-to-end} se vió impulsada y a la vez creó la necesidad de contar con corpus de datos paralelos que permitieran evaluar la calidad de las propuestas. Estos conjuntos de datos tenían que 
+tener la suficiente cantidad de instancias para poder entrenar modelos de estas características. RotoWire (~\cite{wiseman-etal-2017-challenges}) es un punto de referencia ampliamente utilizado, se construyó con cerca de 
+cinco mil pares de datos estadísticos de partidos de baloncesto y su correspondiente resumen descriptivo escrito por profesionales. En ~\cite{puduppully2019data}, los autores introdujeron MLB, un nuevo corpus con aproximadamente 
+25 mil instancias de estádisticas aparejadas con descripciones en este caso en el dominio del beisbol. Otros conjuntos de datos hechos a mano como E2E (~\cite{novikova2017e2e}) se an construido para analizar tareas espec\'ificas 
+como la capacidad de realización lingüística.
+
+        \begin{figure}[!]
+            \begin{center}
+                \includegraphics[width=\textwidth]{Graphics/rotowire_instancia.png}
+            \end{center}
+            \caption{Instancia de RotoWire (~\cite{wiseman-etal-2017-challenges}).}
+            \label{fig_RotoWire}
+        \end{figure}
+
+ En ~\cite{wiseman-etal-2017-challenges} los autores mostraron la capacidad de estos modelos de producir un texto dotado de mayor 
+fluidez en comparativa con propuestas tradicionales. A su vez, además de ser propensos a la alucinación (es decir, generan texto que no es compatible con la entrada), 
+mostraron  deficiencias a la hora de seleccionar el contenido y/o estructurar el documento (por ejemplo, en el marco de una descripción biográfica, el dato de la fecha de nacimiento debe 
+aparecer, mientras que, por regla general no es apropiado que a su vez un texto de este tipo termine con la expresión: \textit{nació el ...} ). Para mejorar esta situación ~\cite{puduppully2019dataselandplan}  
+presentaron una arquitectura que incorpora selección y planificación de contenido sin sacrificar el entrenamiento \emph{end-to-end}. Descompusieron la tarea de generación en dos etapas. Dado el corpus de 
+registros de datos (junto con las descripciones), primero generaron un plan de contenido destacando qué información debía mencionarse y en qué orden para luego generar el documento teniendo en 
+cuenta dicho plan. Un enfoque similar se planteó en ~\cite{chen2021neural}, mientras que en ~\cite{moryossef2019step}, desacoplaron por completo ambas fases, dejando solo el modelo neuronal para la realización del 
+texto una vez desarrollada la estructura informativa.
+
+        \begin{figure}[!]
+            \begin{center}
+                \includegraphics[scale=0.4]{Graphics/lapata_arquitectura.png}
+            \end{center}
+            \caption{Arquitectura del modelo presentado en ~\cite{puduppully2019dataselandplan}.}
+            \label{fig_lapata_arquitectura}
+        \end{figure}
+
+    Se demostró (~\cite{wiseman-etal-2017-challenges,feferreira2019neural,duvsek2020evaluating,sharma2022innovations}) que los sitemas basados en redes neuronales
+ son capaces de producir texto que supera en fluidez y en evaluaciones humanas como la naturalidad a los sistemas tradicionales. Por contra, 
+estos modelos siguen lidiando con su principal problema que es la presencia de alucinacinaciones en las salidas. Esta deficiencia es objeto de interés 
+de los investigadores en este campo (~\cite{ji2022survey}). Por esta razón, Robert Dale, en su \textit{Natural language generation: The commercial state of
+the art in 2020} (~\cite{dale2020natural}) planteó que estas soluciones, aunque prometedoras, se 
+encuentran en fase académica y que en la industrian, en un entorno donde la fidelidad de los datos es crucial, su adopción general no ha llegado.   
+
+
+\section{Sistemas de GLN}
+
+    -Modeles propuestos en la literatura.\\
+    -Industriales\\
+    -Académicos\\
+    -En el deporte\\
