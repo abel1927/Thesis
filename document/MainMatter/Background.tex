@@ -195,7 +195,7 @@ específicos para mejorar la calidad del resultado más allá de los mecanismos 
 \emph{end-to-end} se vió impulsada y a la vez creó la necesidad de contar con corpus de datos paralelos que permitieran evaluar la calidad de las propuestas. Estos conjuntos de datos tenían que 
 tener la suficiente cantidad de instancias para poder entrenar modelos de estas características. RotoWire (~\cite{wiseman-etal-2017-challenges}) es un punto de referencia ampliamente utilizado, se construyó con cerca de 
 cinco mil pares de datos estadísticos de partidos de baloncesto y su correspondiente resumen descriptivo escrito por profesionales. En ~\cite{puduppully2019data}, los autores introdujeron MLB, un nuevo corpus con aproximadamente 
-25 mil instancias de estádisticas aparejadas con descripciones en este caso en el dominio del beisbol. Otros conjuntos de datos hechos a mano como E2E (~\cite{novikova2017e2e}) se an construido para analizar tareas espec\'ificas 
+25 mil instancias de estádisticas aparejadas con descripciones en este caso en el dominio del beisbol. Otros conjuntos de datos hechos a mano como E2E (~\cite{novikova2017e2e}) se han construido para analizar tareas espec\'ificas 
 como la capacidad de realización lingüística.
 
         \begin{figure}[!]
@@ -208,8 +208,8 @@ como la capacidad de realización lingüística.
 
  En ~\cite{wiseman-etal-2017-challenges} los autores mostraron la capacidad de estos modelos de producir un texto dotado de mayor 
 fluidez en comparativa con propuestas tradicionales. A su vez, además de ser propensos a la alucinación (es decir, generan texto que no es compatible con la entrada), 
-mostraron  deficiencias a la hora de seleccionar el contenido y/o estructurar el documento (por ejemplo, en el marco de una descripción biográfica, el dato de la fecha de nacimiento debe 
-aparecer, mientras que, por regla general no es apropiado que a su vez un texto de este tipo termine con la expresión: \textit{nació el ...} ). Para mejorar esta situación ~\cite{puduppully2019dataselandplan}  
+mostraron  deficiencias a la hora de seleccionar el contenido y/o estructurar el documento (por ejemplo, en el marco de una descripción biográfica, la omisión de la fecha de nacimiento es un relevante, 
+mientras que de aparecer no es apropiado que lo haga en la última oración del escrito ). Para mejorar esta situación ~\cite{puduppully2019dataselandplan}  
 presentaron una arquitectura que incorpora selección y planificación de contenido sin sacrificar el entrenamiento \emph{end-to-end}. Descompusieron la tarea de generación en dos etapas. Dado el corpus de 
 registros de datos (junto con las descripciones), primero generaron un plan de contenido destacando qué información debía mencionarse y en qué orden para luego generar el documento teniendo en 
 cuenta dicho plan. Un enfoque similar se planteó en ~\cite{chen2021neural}, mientras que en ~\cite{moryossef2019step}, desacoplaron por completo ambas fases, dejando solo el modelo neuronal para la realización del 
@@ -223,17 +223,68 @@ texto una vez desarrollada la estructura informativa.
             \label{fig_lapata_arquitectura}
         \end{figure}
 
-    Se demostró (~\cite{wiseman-etal-2017-challenges,feferreira2019neural,duvsek2020evaluating,sharma2022innovations}) que los sitemas basados en redes neuronales
+
+    La utilización de modelos preentrenados en tareas de generación de texto-a-texto para producir texto a partir de datos en base al reentrenamiento 
+fue de los enfoques que se exploraron recientemente. En (~\cite{kale2020text}) los autores utilizaron el modelo T5 (\emph{“Text-to-Text Transfer Transformer”}, su nombre en inglés) (~\cite{raffel2020exploring})
+preentrenado para tareas de generación de resúmenes, traducción entre idiomas, clasificación de texto entre otras. Sus resultados fueron alentadores sobre todo desde el punto de vista de 
+la generalizción. Este modelo, no solo tuvo una buena actuación en cuanto a la calidad del texto generado sino que también mostró buena adaptación a dominios distinos a los 
+del reentrenamiento, lo cual constituyó una diferencia respecto a los modelos neuronales tratados anterioremente.
+
+
+    Como quedó patente en (~\cite{wiseman-etal-2017-challenges,ferreira2019neural,duvsek2020evaluating,sharma2022innovations})  los sitemas basados en redes neuronales
  son capaces de producir texto que supera en fluidez y en evaluaciones humanas como la naturalidad a los sistemas tradicionales. Por contra, 
 estos modelos siguen lidiando con su principal problema que es la presencia de alucinacinaciones en las salidas. Esta deficiencia es objeto de interés 
 de los investigadores en este campo (~\cite{ji2022survey}). Por esta razón, Robert Dale, en su \textit{Natural language generation: The commercial state of
 the art in 2020} (~\cite{dale2020natural}) planteó que estas soluciones, aunque prometedoras, se 
-encuentran en fase académica y que en la industrian, en un entorno donde la fidelidad de los datos es crucial, su adopción general no ha llegado.   
+encuentran en fase principalmente académica y que en la industrian, en un entorno donde la fidelidad de los datos es crucial, su adopción general no ha llegado.   
 
 
-\section{Sistemas de GLN}
+\section{Sistemas para la generación de texto a partir de datos}
 
-    -Modeles propuestos en la literatura.\\
-    -Industriales\\
-    -Académicos\\
-    -En el deporte\\
+    Al referirse al campo de GLN, se puede afirmar que el mismo es ya un campo investigativo consolidado dada la cantidad 
+de sistemas que han sido implementados y la variedad de los dominios de su aplicación práctica. FOG (\emph{Forecasting Generator}, en inglés) (~\cite{goldberg1994using}) es 
+de los primeros sistemas funcionales para la generación de texto a partir de datos. Este, al igual que SumTime (~\cite{reiter2005choosing}) genera breves pronósticos del tiempo
+a partir de los valores de variables meteórologicas. 
+
+    En la escena industrial, propiciado por el desarrollo constante de herramientas para el análsis y captura de datos,
+hubo empresas que detectaron en la generación de texto un nicho de mercado no cubierto y prometedor (~\cite{dale2020natural}). Compañías como \textit{Ax Semantic\footnote[1]{https://en.ax-semantics.com/}} y 
+\textit{Narrativa\footnote[2]{https://www.narrativa.com/}} ofrecen soluciones para automatizar la descripción de productos para el comercio electrónico. 
+\textit{Automated Insights} creó su plataforma para la generación de lenguaje natural, \textit{Wordsmith}. Este software da la posibilidad al usuario de crear un conjunto 
+de plantillas basadas en reglas que desciben los datos que desea a tratar. A partir de las mismas, y en dependencia de su sofistición los textos generados pueden llegar a ser 
+indistinguibles de los textos redactados por un humano. Precisamente en colaboración con \textit{Automated Insights}, la gran corporación de prensa \textit{Associated Press (AP)} generó l
+las vistas previas de los partidos de una temporada regular de baloncesto, liberando a los periodistas de este trabajo. A su vez, \textit{Yahoo!} utiliza esta tecnología para crear informes 
+de jugadores y resúmenes de partidos de fútbol del juego \textit{Fotball Manager} que es de gran interés para sus usuarios. Otro caso de uso dentro de la automatización de contenido en la prensa lo encontramos en \textit{PostData\footnote[3]{http://www.postdata.club/index.html}}, un sitio de periodismo 
+de datos cubano, donde utilizan un modelo propio, \textit{ArmandBot} (~\cite{balboa2020}), para generar reportes sobre las actuaciones de los peloteros cubanos en grandes ligas.
+
+    En la literatura hay propuestos varios modelos de sitemas para la GLN en el ámbito del deporte. Por ejemplo, en (~\cite{kanerva2019template}), apoyados en la constucción de un corpues de 2000 encuentros de hockey sobre hielo 
+proponen un modelos de secuencia a secuencia, para generan narrativas sobre esta práctica deportiva. Hasan (~\cite{hasan2011automatic}) propuso un sistema basado en plantillas que sigue la arquitectura tradicional basada en módulos para 
+modular para generar texto en inglés y bengalí\footnote[5]{El bengalí es el idioma nacional y el idioma oficial de la República Popular de Bangladesh} para generar resúmenes de juegos de críquet a partir de datos estructurados obtenidos de la web. 
+Siguiendo el mismo enfoque, en ~\cite{gu2016incorporating} presentan otro sistema basado en plantillas para el críquet, en este caso al estilo propio de Sri Lanka.
+ 
+En el caso del fútbol, una de las principales propuestas fue GoalGetter (~\cite{theune2001data}), un sistema de datos a voz en idioma neerlandés, que consta de dos módulos, uno para tranformar los datos en texto y 
+otro para luego llevar el texto a sonido. GoalGetter tomó los datos de una página de Telexto que contenía los datos de uno o más partidos de fútbol. Una característica de este sistema es que propuso una arquitectura diferente al 
+estándar modular de otros sistemas. En este caso, utilizó un solo módulo para la generación de texto que consumía una base de conocimiento con los nombres de los jugadores y equipos junto a un sistema de plantillas sintácticas.
+ En base a este trabajo, en \cite{aires2016automatic} se propuso GameRecapper, un sistema capaz de generar resúmenes de partidos de fútbol de la liga portuguesa en idioma portugés. Este sistema obtenía los datos de \textit{www.zerozero.pt} 
+una página web que contenía la información de partidos los partidos de cada jornada. Al módulo de generación agregaron a su vez una base de conocimiento y un conjunto de funciones léxico semánticas para mejorar la calidad del texto. De este trabajo es resaltó el hecho 
+de que hicieron una caracterización más amplia del evento principal del fútbol, el gol, en su sistema de plantillas. Para cada distinto escenario propusieron la creación de plantillas oracionales específicas (primer gol del patido, último gol, gol que empata, etc).
+Pass (~\cite{van2017pass}), es una propuesta basada en GoalGetter que busca diferenciar el texto producido en base a la audiencia del mismo. Para ellos establecen un sistemas de plantillas que abarca distintos posibles escenarios de resultado de un partido: victoria o derrota 
+del equipo local, victoria o derrota del equipo visitante o empate. La elección de cual plantilla utilizar va en depencia de a qué afición irá dirigido el texto.  
+
+    La gran mayoría de estos sistemas cuentan con un dominio específicos de aplicación, así como cuentan con una fuente de datos de la 
+cual extraer la información a desarrollar. Por tanto, y aunque fuera posible la adaptabilidad, existe una depencia de la fuente de información. A su vez, el tener un dominio bien definido  
+permite agreagar bases de conocimiento previo del mismo que enriquezcan los modelos. Predominan los sistemas basados en plantillas y reglas, variendo entre si su nivel de complejidad. Estos 
+sistemas son especialmente adaptables y prácticos para idiomas distintos del inglés debido a que las herramientas de generación específicas desarrolladas son menores en compaaración (~\cite{gunasiri2021automated}). 
+    En el presente trabajo se presenta un prototipo de sistema basado en la propuesta de un esquema general que permita definir esquemas específicos de entradas en formas de 4-tuplas (tuplas de cuatro elementos) de 
+conocimiento de un deporte de enfrentamiento dos a dos ( beisbol, voleibol, judo, etc). A su vez, se seleccionan dos deportes, en este caso, futbol y boxeo, y a partir de las especifiaciones planteadas se 
+se definen dos modelos capaces de generar un resumen informativo del evento en cuestión. Los modelos siguen el estandar basado en reglas plantillas simples de expresiones y oraciones.
+    
+    %\begin{figure}[htbp]
+    %    \begin{center}
+    %        %\includesvg{Graphics/arquitecturatesis3.svg}
+    %        \includegraphics[width=\textwidth]{Graphics/arquitecturatesis3.svg}
+    %    \end{center}
+    %    \caption{Arquitectura del modelo propuesto}
+    %    \label{arquitecturadelmodelo}
+    %\end{figure}
+
+
