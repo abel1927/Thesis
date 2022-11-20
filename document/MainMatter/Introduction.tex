@@ -4,16 +4,22 @@
     Desde hace varios años la Inteligencia Artificial (IA) viene revolucionando e \\impactando significativamente en muchas esferas de la 
 vida del hombre. Dentro de la IA hay muchos campos de estudios y entre ellos el Procesamiento de Lenguaje Natural (PLN). Este abarca el conjunto de 
 t\'ecnicas computacionales que tienen como objetivo el trabajo con lenguaje humano, incluyendo desde la extracci\'on de entidades en textos hasta modelos 
-de comprensi\'on y generación de textos. Precisamente, uno de los subcampos dentro del PLN que está acaparando especial atención en 
-los últimos tiempos es el de la Generación de Lenguaje Natural (GLN) y en especial aquel que está enfocado a expresar a través de texto 
-información contenida en forma de datos no lingüísticos (D2T por sus siglas en inglés, Data-to-Text). Existe consenso en la forma en 
-que la salida de un sistema de GLN debe presentarse: texto. Sin embargo no hay establecido un est\'andar en cuanto a la forma en 
-que se presentan los datos para su procesamiento, variando de un sistema a otro. Como regla general el texto producido por estos sistemas 
-debe mantenar fidelidad a los datos que lo originan, así como debe ser consecuente con su intención comunicativa, no siendo lo mismo un 
-sistema para la generación de diálogos que uno que tiene como objetivo describir resúmenes biográficos.
-
+de comprensi\'on y generación de textos. Tanto la generación de texto a texto (\emph{text-to-text}, en inglés) como la generación de 
+datos a texto (D2T por sus siglas en inglés, \emph{data-to-text} ) son instancias de la Generación de Lenguaje Natural. Reiter y Dale en (~\cite{Reiter1997BuildingAN}), 
+caracterizan la Generación de Lenguaje Natural (GLN) como el subcampo de la IA y la lingüística computacional que se ocupa de la construcción de sistemas informáticos que pueden 
+producir textos comprensibles en inglés u otros idiomas humanos a partir de alguna representación no lingüística subyacente de la información. 
+Esta definición se adapta fácilmente a los sistemas cuya entrada consiste en datos. Como el presente trabajo está enfocado al trabajo a partir de datos, en lo siguiente, se 
+utiliza esta defiinición al referirse a los sistemas de GLN. 
+    
+    Existe consenso en la forma en que la salida de un sistema de GLN debe presentarse: texto. Sin embargo no hay establecido un est\'andar en cuanto a la forma en 
+que se presentan los datos para su procesamiento, variando de un sistema a otro (~\cite{reiter_dale_2000,Gatt2018SurveyOT}). Como regla general el texto producido por estos sistemas 
+debe mantenar fidelidad a los datos que lo originan, así como debe ser consecuente con su intención comunicativa (~\cite{reiter_dale_2000}), no siendo lo mismo un 
+sistema para la generación de diálogos que uno que tiene como objetivo describir resúmenes biográficos. Propuestas tempranas de sistemas como Ana (~\cite{kukich1983design}) para 
+generar reportes financieros, o como FoG (~\cite{goldberg1994using}), generador de reportes climáticos, comenzaron a mostrar las capacidades de estos 
+modelos a la hora dotar de interpretabilidad y relevancia datos que se presentaban de forma repetitiva y tediosa.
+  
     En un contexto donde la producción de datos se ha acelerado resultado de los avances tecnológicos y de los sistemas industriales, se ha hecho necesario para 
-las empresas el manejo y la interpretación de estos datos. Por esa raz\'on hay empresas que comenzaron a brindar estos servicios a otras. Un ejemplo es la compañía 
+las empresas el manejo y la interpretación de estos datos. Por esa raz\'on hay empresas que comenzaron a brindar estos servicios a otras (~\cite{dale2020natural}). Un ejemplo es la compañía 
 \textit{Automated Insights\footnote[1]{https://automatedinsights.com/}} que ha enfocado su negocio en brindar soluciones a otras corporaciones con vista a automatizar sus 
 procesos de producción de texto. Entre los casos de uso clásicos de estas soluciones encontramos, en el marco del comercio electr\'onico, la generación de descripciones de 
 productos a partir de sus fichas técnicas. El periodismo ha sido otra de las esferas beneficiadas de estos avances en la GLN. La generación automática de noticias (conocida como 
@@ -23,17 +29,18 @@ En este caso su sistema se apoda \textit{Heliograf} y les permite cubrir todos l
 cada semana.
 
     Por su carácter estadístico y su gran audiencia, el deporte es una de las esferas que se puede beneficiar claramente del desarrollo de los sistemas 
-de generación automática de texto. Es relativamente sencillo encontrar en la web los datos o tablas estadísticas de un determinado enfrementamiento deportivo, 
-pero la gran variedad de eventos que se suceden constantemente hacen que sea humanamente imposible darle cobertura a cada uno de ellos a nivel de narración y 
-resumen. Por esta razón es importante el desarrollo de sistemas que sean capaz de cubrir muchas esferas del deporte.\\
+de generación automática de texto. Muchos trabajos se han enfocado en este tema (~\cite{theune2001data, van2017pass, gunasiri2021automated,}).  Es relativamente sencillo encontrar en la web 
+los datos o tablas estadísticas de un determinado enfrementamiento deportivo, pero la gran variedad de eventos que se suceden constantemente hacen 
+que sea humanamente imposible darle cobertura a cada uno de ellos a nivel de narración y resumen. Por esta razón es importante el desarrollo 
+de sistemas que sean capaz de cubrir muchas esferas del deporte.
 
 
-   \textbf{Problema}\\
+   %\textbf{Problema}\\
 
     Aún con el desarrollo de los sistemas de GLN y su mayor asimilación en diversos ámbitos, siguen siendo absolutamente predominantes los 
 sistemas que tienen el inglés como idioma de referencia a la hora de generar el texto de la salida. En la literatura consultada no abundan las soluciones 
-en lenguaje español en este campo, entre otras razones influenciado esto por la mayor complejidad estructural del español como lenguaje. De la misma forma esto 
-impacta directamente en los sistemas que tienen como objetivo comunicativo los eventos deportivos. Siendo el deporte un objeto de mucho interés en la 
+en lenguaje español en este campo, entre otras razones influenciado esto por la mayor complejidad estructural del español como lenguaje, así como el menor número 
+de herramientas específicas para este. De la misma forma esto impacta directamente en los sistemas que tienen como objetivo comunicativo los eventos deportivos. Siendo el deporte un objeto de mucho interés en la 
 comunidad hispanohablante en general y en Cuba en particular, se hace necesario ampliar los escenarios existentes desde esta perspectiva.
 
     Los sistemas existentes en la literatura consultada en su mayoría se basan en un conocimiento explícito del dominio a tratar así como en una 
@@ -41,51 +48,58 @@ estructuración predefinida de los datos en base al dominio. A su vez, son mucha
 la fuente como parte propia del sistema y no propiciados por el usuario. Son pocos los sistemas funcionales, fuera de la industria, capaces de 
 desacoplarse de las fuentes de datos y de abarcar desde una misma estructura distintos dominios.
 
-    Los modelos neuronales están impactando el estado del arte de muchas tareas en el campo del PLN. Se hace necesario 
-acercar el prisma hacia los mismos desde el punto de vista de la GLN.\\
+    %Los modelos neuronales están impactando el estado del arte de muchas tareas en el campo del PLN. Se hace necesario 
+%acercar el prisma hacia los mismos desde el punto de vista de la GLN.\\
 
-    \textbf{Motivaciones}\\
+ %   \textbf{Motivaciones}\\
 
     La propuesta del presente trabajo está motivada en las problemáticas anteriores. Siendo el deporte un campo que despierta tanto 
-interés y que es fuente de entretenimiento de muchas personas, sentar las bases de una metodología para la generación de resúmenes de 
-eventos deportivos es un reto estimulante.
-
-    En el presente trabajo se presenta un sistema capaz de generar resúmenes de eventos deportivos a partir de los datos prove\'idos por 
-el usuario. El mismo tiene diversos casos de uso, y entre otros, servirá para dar descripción a eventos de interés de un 
-determinado público que pudieran quedar fuera de la cobertura noticiosa de los medios de prensa. En cualquier escenario su utilidad quedará 
-marcada por las necesidad que quieran cubrir sus usurios, con la única condición de poseer los datos.
-
-    Así mismo este trabajo se presenta en el marco de las líneas de investigación existentes en el grupo de Inteligencia Artificial de la 
-Facultad de Matemática y Computación de la Universidad de La Habana(MATCOM). Servirá como base para futuros trabajos que sigan ampliando y 
-profundizando en la GLN.\\
-
-
-    \textbf{Antecedentes}\\
+interés y que es fuente de entretenimiento de muchas personas, sentar las bases del diseño de un sistema para la generación de resúmenes de 
+eventos deportivos es un reto estimulante. Así mismo este trabajo se presenta en el marco de las líneas de investigación existentes en el 
+grupo de Inteligencia Artificial de la Facultad de Matemática y Computación de la Universidad de La Habana(MATCOM). Servirá como base 
+para futuros trabajos que sigan ampliando y profundizando en la GLN.
 
     La intención de adentrarse en la investigación de los sitemas de GLN dentro del departamento de IA de MATCOM comenzó con la propuesta, en 2019, 
 de realizar un modelo GLN capaz de dar cobertura a las actuaciones destacadas de los peloteros cubanos en la Grandes Ligas de Béisbol. La misma derivó 
 en el trabajo de tesis de Roberto Balboa González (~\cite{balboa2020}). Este primer acercamiento a la GLN sirvió para buscar nuevos escenarios a abracar 
-desde el punto de vista de esta disciplina.
+desde el punto de vista de esta disciplina. El resto de antecedentes vienen enmarcados en el estudio de la literatura y de los sitemas existentes dentro del campo de la GLN que 
+se presentan en un capítulo posterior.
 
-    El resto de antecedentes de este trabajo vienen enmarcados en el estudio de la literatura y de los sitemas existentes dentro del campo de la GLN que 
-se presentan en un capítulo posterior.\\
+    
+    Partiendo de la hipótesis de que es posible definir un esquema general para la definición de los eventos deportivos, en el presente trabajo
+se presenta un prototipo de sistema capaz de generar resúmenes de eventos deportivos a partir de los datos prove\'idos por 
+el usuario. Se utiliza el futbol y el boxeo como muestras para validar la propuesta. 
+
+    Un sistema de este tipo tiene diversos casos de uso, y entre otros, sirve para dar descripción a eventos de interés de un 
+determinado público que pudieran quedar fuera de la cobertura noticiosa de los medios de prensa. En cualquier otro escenario, 
+su utilidad queda marcada por las necesidad que quieran cubrir sus usurios, con la única condición de poseer los datos.
+\\
 
     \textbf{Objetivo}\\
 
-    El objetivo general de este trabajo es proponer una metodología funcional para la generación de res\'umenes de eventos deportivos 
-independientes de la fuente de datos del dominio. A partir de dicha metodología se presenta la implementación de un sistema capaz de 
-crear dichos resúmenes en idioma español. 
+    El objetivo general de este trabajo es la propuesta de diseño de un sistema funcional para la generación de res\'umenes de eventos deportivos 
+independientes de la fuente de datos del dominio. A partir de dicho diseño se presenta dos modelos capaces de generar resúmenes de partidos de 
+fútbol y combates de boxeo. 
+
     Para la consecución del objetivo es necesario:
 
     \begin{itemize}
-        \item Estudiar detalladamente la literatura relacionada con la GLN y determinar los enfoques factibles. 
-        \item Comprobar los sistemas de generación relacionados con el dominio (eventos deportivos) y sus caracter\'isticas.
-        \item Estudiar en profundidad el dominio, y determinar los rasgos distintivos y comunes entre los eventos deportivos.
-        \item Diseñar un esquema de eventos comunes característicos entre los deportes que de lugar a un esquema específico de cada uno.
-        \item Plantear una estructura intermedia para el ingreso de los datos en base al esquema general diseñado. 
-        \item Diseñar e implementar los modelos generadores de texto.
-        \item Presentar el sistema funcional para la generación de resúmenes.       
+        \item Estudiar detalladamente la literatura relacionada con la GLN y determinar los enfoques factibles.
+        \item Analizar el dominio y determinar características comunes de los eventos deportivos
+        \item Crear un esquema general a partir del cual poder definir esquemas específicos para la entrada de datos de los distintos deportes.
+        \item Diseñar un sistema para la generación de resúmenes.
+        \item Validar la propuesta con dos modelos de generación de texto basados en reglas y plantillas para el fútbol y el boxeo.   
     \end{itemize}
+
+    %\begin{itemize}
+    %    \item Estudiar detalladamente la literatura relacionada con la GLN y determinar los enfoques factibles. 
+    %    \item Comprobar los sistemas de generación relacionados con el dominio (eventos deportivos) y sus caracter\'isticas.
+    %    \item Estudiar en profundidad el dominio, y determinar los rasgos distintivos y comunes entre los eventos deportivos.
+    %    \item Diseñar un esquema de eventos comunes característicos entre los deportes que de lugar a un esquema específico de cada uno.
+    %    \item Plantear una estructura intermedia para el ingreso de los datos en base al esquema general diseñado. 
+    %    \item Diseñar e implementar los modelos generadores de texto.
+    %    \item Presentar el sistema funcional para la generación de resúmenes.       
+    %\end{itemize}
 
     \textbf{Estructura del trabajo}\\
 

@@ -1,6 +1,33 @@
 \chapter{Estado del Arte}\label{chapter:state-of-the-art}
 
 
+    Los sistemas de NLG normalmente reciben los datos de forma estructurada, pero esta estructura puede variar de un sistemas a otro.
+La natualeza de los datos es diferente con lo cual sus representaciones pueden ir desde rergistros de base de datos, bases de conocimiento, 
+grafos de conocimiento, o estructuras intermedias que utilizan representaciones del tipo clave-valor como pudiera ser el formato JSON, entre otras. 
+Por ejemplo, en (~\cite{Yu2006ChoosingTC}) obtienen los datos en forma de series temporales, mientras que en (~\cite{kukich1983design}) los trabajan a 
+partir de una base de datos de registros financieros.
+
+En cuanto a la arquitectura, el diseño de sistemas NLG es un campo abierto donde no existe un amplio consenso. Existe una diversidad de propuestas e implementaciones 
+que varían en dependencia del desarrollador y del problema para el cual se crea el sistema NLG. En este sentido, es difícil identificar elementos comunes y proporcionar una abstracción 
+completa que sea aplicable a la mayoría de los sistemas NLG (~\cite{ramos2016role}).
+
+
+ Sin embargo, la arquitectura propuesta por Riter y Dale en (~\cite{Reiter1997BuildingAN}) se ha tomado como el estandar de facto 
+dentro de este campo, lo que no implica que muchos sistemas no plantearan estructuras diferentes (~\cite{Perera2017RecentAI}). 
+Esta arquitectura de tubería (\emph{pipeline} en inglés), o modular, establece que los sistemas NLG pueden dividirse en módulos 
+que encapsulen distintas tareas dentro del proceso de generación del texto.
+
+    
+
+    \begin{figure}[!]
+        \begin{center}
+            \includegraphics[width=\textwidth]{Graphics/arquitecturaPipeline_Capa 1.png}
+        \end{center}
+        \caption{Arquitectura modular planteada en (~\cite{Reiter1997BuildingAN}).}
+        \label{fig_arq_Pipeline}
+    \end{figure}
+
+
 \section{Tareas principales de los sistemas Generación de Lenguaje Natural}
 
     Hasta hoy considerado como el punto de referencia y texto más completo en el campo de GLN(\cite{Gatt2018SurveyOT}), el libro de Ehud Riter y
@@ -16,7 +43,11 @@ de un sistema de GLN:
     \item Realización lingüística: conformación del texto con oraciones bien formadas.
 \end{itemize}
 
-Cada una de estas tareas presenta un objetivo dentro del sistema y existen distintas técnias para su realización.
+
+Estas tareas naturalmente se puden dividir entre las que envuelven el proceso de elegir qué decir y de qué forma (planificación del contenido) 
+a aprtir de los datos, y las que tienen un caracter más orientado al proceso lingüístico de elegir las términos adecuados para la expresión 
+en si( realización)( ~\cite{Gatt2018SurveyOT}). Cada una de estas tareas, aunque no presentes todas en todos los sitemas,  presentan distintos 
+objetivos dentro de los mismos y existen distintas técnias para cada una de ellas en la literatura.
     
 \subsection{Determinación del contenido}
 
@@ -279,15 +310,7 @@ conocimiento de un deporte de enfrentamiento dos a dos ( beisbol, voleibol, judo
 se definen dos modelos capaces de generar un resumen informativo del evento en cuestión. Los modelos siguen el estandar basado en reglas plantillas simples de expresiones y oraciones.
 
 
-    \begin{figure}[!]
-        \begin{center}
-            \includegraphics[width=\textwidth]{Graphics/arquitecturaprop2.png}
-        \end{center}
-        \caption{Arquitectura del modelo propuesto}
-        \label{arquitecturadelmodelo}
-    \end{figure}
 
-    afdgfd
 
     %\begin{figure}[!]
     %    \begin{center}
