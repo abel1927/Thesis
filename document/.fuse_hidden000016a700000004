@@ -1,0 +1,27 @@
+\BOOKMARK [0][-]{chapter*.8}{Introducci\363n}{}% 1
+\BOOKMARK [0][-]{chapter.1}{Estado del Arte}{}% 2
+\BOOKMARK [1][-]{section.1.1}{Tareas principales de los sistemas Generaci\363n de Lenguaje Natural}{chapter.1}% 3
+\BOOKMARK [2][-]{subsection.1.1.1}{Determinaci\363n del contenido}{section.1.1}% 4
+\BOOKMARK [2][-]{subsection.1.1.2}{Estructuraci\363n del texto}{section.1.1}% 5
+\BOOKMARK [2][-]{subsection.1.1.3}{Agregaci\363n}{section.1.1}% 6
+\BOOKMARK [2][-]{subsection.1.1.4}{Lexicalizaci\363n}{section.1.1}% 7
+\BOOKMARK [2][-]{subsection.1.1.5}{Expresiones de referencia}{section.1.1}% 8
+\BOOKMARK [2][-]{subsection.1.1.6}{Realizaci\363n ling\374\355stica}{section.1.1}% 9
+\BOOKMARK [1][-]{section.1.2}{Propuestas neuronales para la generaci\363n de texto}{chapter.1}% 10
+\BOOKMARK [1][-]{section.1.3}{Sistemas para la generaci\363n de texto a partir de datos}{chapter.1}% 11
+\BOOKMARK [0][-]{chapter.2}{Propuesta}{}% 12
+\BOOKMARK [1][-]{section.2.1}{Propuesta de Esquema General}{chapter.2}% 13
+\BOOKMARK [1][-]{section.2.2}{Definici\363n y modelo generador para el f\372tbol}{chapter.2}% 14
+\BOOKMARK [2][-]{subsection.2.2.1}{Esquema de entrada de datos}{section.2.2}% 15
+\BOOKMARK [2][-]{subsection.2.2.2}{Generaci\363n del reporte}{section.2.2}% 16
+\BOOKMARK [2][-]{subsection.2.2.3}{Planificaci\363n de contenido}{section.2.2}% 17
+\BOOKMARK [2][-]{subsection.2.2.4}{Realizaci\363n}{section.2.2}% 18
+\BOOKMARK [2][-]{subsection.2.2.5}{Resultado}{section.2.2}% 19
+\BOOKMARK [1][-]{section.2.3}{Definici\363n y modelo generador para el boxeo}{chapter.2}% 20
+\BOOKMARK [2][-]{subsection.2.3.1}{Esquema de entrada de datos}{section.2.3}% 21
+\BOOKMARK [2][-]{subsection.2.3.2}{Generaci\363n del reporte}{section.2.3}% 22
+\BOOKMARK [2][-]{subsection.2.3.3}{Resultado}{section.2.3}% 23
+\BOOKMARK [0][-]{chapter.3}{Detalles de Implementaci\363n y Experimentos}{}% 24
+\BOOKMARK [0][-]{section*.18}{Conclusiones}{}% 25
+\BOOKMARK [0][-]{section*.20}{Recomendaciones}{}% 26
+\BOOKMARK [0][-]{chapter*.22}{Bibliograf\355a}{}% 27
