@@ -550,7 +550,104 @@ la expresión de la información en las distintas oraciones.
 
     \textbf{Presentación}
 
-    Para la presentación se utilizan las plantillas de \textit{categoría}
+    Para la presentación se utilizan las plantillas siguientes: \textit{plantilla de categoría}, \textit{plantilla de sede}, 
+\textit{plantilla de resultado}, \textit{plantilla de tipo definición}, \textit{plantilla de tipo de golpeo}. La forma de realizar cada tipo de resultado es diferente, porque, 
+por ejemplo, la plantilla de \textit{tipo de golpeo} solo se utiliza cuando se define el resultado por nocaut. Para dotar 
+al modelo de variabilidad no solo se construyeron al menos 4 plantillas de cada tipo, sino que además las oraciones se conforman 
+con estructura variable jugando con las estructuras propias de las plantillas.
+    Algunos ejemplos de estructura:  “”
+    \begin{itemize}
+        \item \textit{plantilla de sede} + “, ” + \textit{plantilla de categoría} + “, ” + \textit{plantilla de resultado} + “ ” + \textit{plantilla de tipo definición}
+        \item \textit{plantilla de sede} + “, ” + \textit{plantilla de categoría} + “, ” + \textit{plantilla de tipo de golpeo} + “ ” + \textit{plantilla de resultado}
+        \item \textit{plantilla de resultado} + “, ” + \textit{plantilla de sede} + “, ” + \textit{plantilla de tipo definición}+ “ ” + \textit{plantilla de categoría}
+    \end{itemize}
+
+    Ejemplos de construcciones:
+    \begin{itemize}
+        \item \textit{ en el ring del $<$ estadio $>$, en la categoría de peso $<$ categoría $>$, $<$ ganador $>$ selló la victoria 
+        sobre $<$ perdedor $>$ por votación dividida de los jueces}
+        \item \textit{ en el $<$ estadio $>$, en la categoría de peso $<$ categoría $>$, con un fuerte recto de derecha $<$ ganador $>$ noqueó a $<$ perdedor $>$}
+    \end{itemize}
+
+    Para que el modelo tuviera más complejidad en cuanto a las estructuras de la salida, para la presentación se construyeron dos 
+plantillas especiales para variar la forma de las oraciones. Estas fueron las \textit{plantillas de prepresentación} y las 
+\textit{plantillas de postsede}.
+    Ejemplos:
+    \begin{itemize}
+        \item \textit{$<$ boxeador\_uno $>$ y $<$ boxeador\_dos $>$ se vieron las caras}
+        \item \textit{la velada tuvo como sede el $<$ estadio $>$}
+    \end{itemize}
+
+    Este es un ejemplo de construcción utilizando estas plantillas:
+    \begin{itemize}
+        \item \textit{$<$ boxeador\_uno $>$ y $<$ boxeador\_dos $>$ se vieron las caras en la categoría de peso $<$ categoría $>$. Con un buen 
+        gancho $<$ ganador $>$ noqueó a $<$ perdedor $>$. La velada tuvo como sede el $<$ estadio $>$}
+    \end{itemize}
+
+
+    \textbf{Votaciones de los jueces}\\
+
+    La expresión de la votación de los jueces sigue una construcción más simple basada en solo dos grupos de plantillas. 
+Las \textit{plantillas de votación} y las \textit{plantillas de complemento de votación}.
+    
+    Las construcciones siguen una de estas estructuras:
+    \begin{itemize}
+        \item \textit{plantilla de complemento de votación} + “ ” + \textit{plantilla de votación}
+        \item \textit{plantilla de votación} + “ ” + \textit{plantilla de complemento de votación}
+    \end{itemize}
+
+    Ejemplo de construcción:
+    \begin{itemize}
+        \item los jueces calificaron  la pelea $<$ votos $>$ a favor de $<$ ganador $>$
+    \end{itemize}
 
 
 
+    \textbf{Derribos}
+
+    Para expresar un derribo simple que ocurre en un determinado asalto, se utiliza: \textit{plantilla de derribo}, 
+    \textit{plantilla de asalto} y \textit{plantilla de golpeo}. Se hacen variaciones sobre la siguiente estructura:
+    \begin{itemize}
+        \item \textit{plantilla de asalto} + “, ” + \textit{plantilla de golpeo} + “, ” + \textit{plantilla de derribo}
+    \end{itemize}
+    Ejemplo de realización:
+    \begin{itemize}
+        \item en el $<$ ordinal\_round $>$ asalto, de un derechazo, $<$ protagonista $>$ puso en conteo de protección a $<$ antagonista $>$
+    \end{itemize}
+
+    Los derribos continuados se expresan con la \textit{plantilla de derribos continuos}  y la \textit{plantilla de múltiples rounds}.
+    Se estructuran:
+    \begin{itemize}
+        \item \textit{plantilla de múltiples rounds} + “ ” + \textit{plantilla de derribos continuo}
+        \item \textit{plantilla de derribos continuo} + “ ” + \textit{plantilla de múltiples rounds} 
+    \end{itemize}
+    Ejemplo de construcción:
+    \begin{itemize}
+        \item \textit{ $<$ protagonista $>$ hizo vistar la lona a $<$ antagonista $>$ en el segundo y cuarto asalto}
+    \end{itemize}
+
+    Para cuando existen derribos de ambos contrincantes en el mismo asalto, las \textit{plantillas de derribo doble} se realiza como 
+una única oración.
+    Ejemplo: \textit{amb@s púgiles se llevaron un conteo de protección en el $<$ ordinal\_round $>$ asalto}
+
+    El comodín arroba (“@”) se desambigua con una de las funciones gramaticales que utiliza el modelo. 
+
+\subsection{Resultado}
+
+    El modelo es capaz de generar los reportes en base a la estructura planteada con independencia de la fuente de datos. 
+Se logró definir un esquema para el boxeo en base al esquema general planteado. De la misma forma, durante el construcción de juegos 
+de datos para probar la propuesta se detectó que no abundan los sitios que describen el boxeo en función de eventos detallados. No es 
+objetivo de este trabajo evaluar la capacidad de encontrar datos que puedan ser adecuados al esquema propuesto. Se entiende será parte de 
+futuros trabajos.
+
+    Se presentan dos muestras de reportes generados para una pelea entre Brian Mendoza y Jeison Rosario. Los datos se construyeron con el 
+visionado de un extracto de la pelea en \textit{youtube.com}.
+
+    \begin{itemize}
+        \item \textit{En el ring del Minneapolis Armory en la categoría de peso medio, con un imparable gancho Brian Mendoza obtuvo la victoria por nocaut frente 
+        a Jeison Rosario en el quinto asalto.
+        Brian Mendoza hizo besar la lona a Jeison Rosario con un derechazo en el segundo asalto.}
+        \item \textit{Ante los aficionados congregados en el Minneapolis Armory Brian Mendoza y Jeison Rosario cumplieron su cita en la categoría 
+        de peso medio. Con un gancho Brian Mendoza obtuvo la victoria al noquear a Jeison Rosario en el quinto asalto.
+        Brian Mendoza puso en conteo de protección a Jeison Rosario con un inesperado puñetazo de derecha en el segundo asalto.}
+    \end{itemize}
