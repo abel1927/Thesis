@@ -148,9 +148,9 @@ Una formación inadecuada de las tuplas de los eventos conllevará a incongruenc
 este trabajo evaluar la factibilidad de la obtención de los datos o su adaptabilidad a la estructura planteada.
 
 
-\subsection{Generación del resumen}
+\subsection{Generación del reporte}
 
-    Con el objetivo de generar resúmenes de partidos de fútbol a patir de las tuplas de conocimiento de los partidos, el sistema propuesto adapta enfoques presentados 
+    Con el objetivo de generar rerportes resumidos de partidos de fútbol a patir de las tuplas de conocimiento de los partidos, el sistema propuesto adapta enfoques presentados 
 en la literatura para esta problemática en idiomas distintos al español. La arquitectura general planteada se presenta en \ref{arquitecturadelmodelo} y constituye una 
 adaptación de la propuesta en (~\cite{aires2016automatic}) que a su vez sigue un enfoque basado en (~\cite{theune2001data}). A diferencia de ambas propuestas, el 
 presente sistema no consume bases de conocimiento del dominio específico a abordar ya que no se enfoca únicamente en una competición, sino que busca adaptarse al hecho 
@@ -429,4 +429,128 @@ A continuación se muestran  dos variantes distintas producidas por el modelo pa
     En el cuatro, Comesaña con un tiro preciso declinó la balanza inicial a favor de Rayo Vallecano, el pase fue de Fran García. Luka Modric niveló el encuentro con un tiro ajustado preciso desde el punto de penal cuando corría el minuto 36. Cuando el crono marcaba el minuto cuarenta, con un disparo ajustado a pase de su compañero Marco Asensio, Militao deshizo la igualdad en favor de Real Madrid. Cuando el crono marcaba el minuto 43 una buena definición de Álvaro García acabó con la ventaja de Real Madrid. Trejo deshizo la igualdad en favor de Rayo Vallecano en el 66 con un gol desde los once metros.
     Con una anotación, el centrocampista de Rayo Vallecano, Trejo, fue el jugador más destacado del partido.}
 \end{itemize}
+
+
+\section{Definición y modelo generador para el boxeo}
+
+    A diferencia del fútbol que fue tratado anteriormente, el boxeo es un deporte individual, cuya estructura de acciones más monótona. Así mismo, 
+las crónicas que tratan el boxeo, al menos las analizadas por el autor, no son tan variables y poseen un matiz informativo más restringido y directo. 
+Aún así, el boxeo fue elegido pues va a permitir ver que nivel de representación se puede alcanzar y cuan abarcador es el esquema general 
+propuesto para conformar entradas de datos.
+
+\subsection{Esquema de entrada de datos}
+
+Para analizar y hacer una abstracción de las características del boxeo y sus eventos más significativos se consultaron las crónicas sobre boxeo de 
+\textit{ESPN Deportes} y de \textit{Fightnews\footnote[1]{https://fightnews.com/}}, un sitio web dedicado a la cobertura del boxeo desde 1999. 
+Asímismo se consultaron y estudiaron las reglas del boxeo profesional. Se utilizó la página del Consejo Mundial de 
+Boxeo\footnote[2]{https://wbcboxing.com/} (World Boxing Council) como referencia para las distintas categoría de pesaje tanto en boxeo masculino como en 
+boxeo femenino.
+
+A patir de este análisis se plantea el esquema de definición para la entrada de datos específicos del boxeo que se puede obervar en la figura \ref{tab:boxeo esquema}. 
+
+\begin{table}[]
+    \begin{tabular}{|c|c|}
+    \hline
+    \textbf{Tipo de Entrada} & \textbf{Valores en el Esquema del Boxeo}                            \\ \hline
+    SEDE                     & Sede                                                                \\ \hline
+    TORNEO                   & \begin{tabular}[c]{@{}c@{}}Evento \\ CombateOrganizado\end{tabular} \\ \hline
+    ENFRENTAMIENTO           & CombateContrincantes                                                \\ \hline
+    ROLENJUEGO               & RepresentaciónDePaís                                                \\ \hline
+    RESULTADOPARCIAL         & Asaltos                                                             \\ \hline
+    RESULTADOFINAL           & VeredictoFinal                                                      \\ \hline
+    EVENTO &
+      \begin{tabular}[c]{@{}c@{}}JabEfectivo, JabDerechaEfectivo, JabIzquierdaEfectivo,\\ JabNoEfectivo, CrochetEfectivo, CrochetNoEfectivo,\\ CrochetDerechaEfectivo, CrochetIzquierdaEfectivo\\ DirectoEfectivo, DirectoNoEfectivo, DirectoDerechaEfectivo,\\ DirectoIzquierdaEfectivo, GanchoEfectivo, GanchoNoEfectivo,\\ GanchoDerechaEfectivo, GanchoIzquierdaEfectivo,\\ SwingEfectivo, SwingNoEfectivo, SwingDerechaEfectivo,\\ SwingIzquierdaEfectivo, GolpeDerechaEfectivo,\\ GolpeIzquierdaEfectivo, Descalificado, NocautPropinado,\\ NocautTécnicoSufrido, CuentaDeOchoSuperada,\\ ConteoProtecciónSuperado, Rendición\end{tabular} \\ \hline
+    \end{tabular}
+    \caption{Esquema de definición del boxeo}
+    \label{tab:boxeo esquema}
+    \end{table}
+
+    Cada esquema plantea sus especificaciones en cuanto a los valores de entrada, estas son las del esquema propuesto:
+
+    \begin{itemize}
+        \item Tupla \textbf{SEDE}: Las expresiones de \textit{asistencia} y \textit{capacidad} de no ser vacías deben ser expresiones numéricas (ej. “1200”).
+        \item Tupla \textbf{TORNEO}: La expresión de \textit{género} debe ser una entre “M” y “F” (masculino, femenino). La expresión de \textit{categoría} se requiere 
+        y debe indicar una de las categoría de pesos permitidas en el boxeo profesional (ej, mosca, superpluma, completo, entre otros). En su defecto, se puede expresar un indicador con 
+        el formato “xxx\_lb” (“135\_lb”) del cual se infiere la categoría a partir del peso.
+        \item Tupla \textbf{ENFRENTAMIENTO}: Las entidades son los nombres de los boxeadores que se enfrentan. La expresión de \textit{fecha}, de ser incluida, debe seguir
+        el siguiente formato: “AAAA-MM-DD HH:MM” (año-mes-día hora:minutos). Es posible que se provea solo el día o la hora, respetando sus formatos específicos.
+        \item Tupla \textbf{ROLENJUEGO}: La entidad de rol es el boxeador, y la entidad complementaria el país que representa.
+        \item Tupla \textbf{RESULTADOPARCIAL}: La entidad es el boxeador al que se refiere, el \textit{indicador de parcial} un número positivo que indica el asalto. La expresión de \textit{puntuación} 
+        debe seguir el formato  “1\_XX\_2\_YY\_3\_ZZ” ej(1\_10\_2\_09\_3\_10) que indica la puntuación de cada juez al boxeador en cuestión.
+        \item Tupla \textbf{RESULTADOFINAL}: La entidad es el boxeador al que se refiere, la expresión de \textit{puntuación} debe seguir el formato  “1\_XXX\_2\_YYY\_3\_ZZZ” ej(1\_098\_2\_097\_3\_098)
+        que representa las votaciones acumuladas de cada juez para el boxeador en cuestión. El \textit{descriptor de resultado} tiene el formato “R\_TR” donde “R” es uno entre entre “V” (victoria), “E” (empate),
+        “D” (derrota) y “TR” uno entre “DU”(unánime), “DD” (dividida), “DM” (mayoritaria), “KO” (nocaut), “DS” ( descalificación), “DT” (técnica), “DA” (abandono).
+        \item Tupla \textbf{EVENTO}: La \textit{expresión temporal} tiene el siguiente formato: “rr\_sss” (ej. “04\_060”, al minuto del cuarto asalto) , donde “rr” indica el asalto y “sss” los segundos transcurridos. 
+        La entidad \textit{protagonista} es el boxeador que protagoniza el evento.
+    \end{itemize}
+
+
+\subsection{Generación del reporte}
+
+    Para la generación de los resúmenes de las peleas de boxeo, el autor siguió, adaptando cuando fuera necesario, las pautas descritas durante la 
+modelación del fútbol. El modelo del boxeo sigue la misma arquitectura planteada en \ref{arquitecturadelmodelo}. Se sigue un enfoque basado en reglas 
+para la etapa de planificación así. Para la realización lingüística también se sigue utilizando un conjunto de plantillas predefinidas.
+
+\subsubsection{Planificación del contenido}
+
+A partir del análisis descrito en la sección anterior se determinó la estructura bajo la cual se va a realizar el reporte. De la lectura y estudio de 
+las crónicas se obtuvo que muchas de ellas presentan una comunicación breve y directa en cuento a la información a brindar. Estos son dos ejemplos de 
+reportes tomados desde cada uno de los medios:
+
+    \begin{itemize}
+        \item por \textit{ESPN}: \textit{“Alycia Baumgardner derrotó por decisión dividida a Mikaela Mayer en la pelea coestelar de una cartelera exclusiva de mujeres en la O2 Arena de Londres. 
+        Los jueces votaron (96-95, 96-95 y 93-97) a favor de Baumgardner, quien retuvo sus cinturones superpluma del Consejo Mundial de Boxeo (CMB) y (...)”}
+        \item por \textit{Fightnews}\footnote[1]{Traducido por \textit{Google Translate}}: \textit{“ El invicto peso ligero Jamaine Oritz (15-0-1, 8 KOs) venció por decisión unánime en diez asaltos a Nahir Albright (14-2, 7 KOs) el viernes por la noche 
+        en el Caribe Royale Resort en Orlando, Florida. Otis estuvo al mando todo el tiempo, ganando 98-92, 97-93, 97-93. Oritz recogió el título vacante de la NABF.”}
+    \end{itemize}
+
+    La estructura seleccionada para el reporte es la que se indica:
+    \begin{itemize}
+        \item  Presentación: Se incluye la información referente a la sede del combate, la categoría, así como de los boxeadores y se indica el resultado y su naturaleza. Si se cuenta con 
+        con información al respecto se da a conocer el tipo de golpeo que propicia las definiciones por nocaut.
+        \item Votaciones de los jueces: Cuando el resultado se defina por las votaciones de los jueces, se incluye un oración con dicho veredicto.
+        \item Derribos: Con el objetivo de dotar de más información el reporte, se incluyeron los derribos que ocurrion durante los combates en caso de que 
+        los hubiera y estuvieran expresados en la entrada.
+    \end{itemize}
+
+    \textbf{Presentación}\\
+
+    El algoritmo del modelo de generación primeramente extrae los datos generales referente a la sede, la categoría, los 
+boxeadores. Luego, chequea el tipo de resultado que tuvo la pelea en función de lo expresado en las tuplas de resultado final.
+Se comprueba si no es incongruente respecto a los eventos, ejemplo, no hay un nocaut en los eventos y el veredicto final indica que el 
+combate se decidió por los jueces. A partir de determinar el tipo de resultado es posible que se determine la plantilla correspondiente para 
+expresarlo.
+
+    \textbf{Votaciones de los jueces}\\
+
+    A partir de conocer el tipo de resultado se determina si la decisión quedó en manos de los jueces. Si es así, se construye una expresión 
+de la votación a partir de representar en una misma estructura los resultados expresados en las tuplas de resultado de 
+ambos boxeadores.\\
+
+    \textbf{Derribos}
+
+    Para determinar los derribos ocurridos en el combate se hace en primera instancia una ordenación por tiempo de 
+ocurrencia de los eventos. A partir de identificar un \textit{ConteoProtecciónSuperado}, se identifica el golpe previo y el asalto, 
+datos con los cuales se identifica el derribo. Luego de identificado todos los derribos ocurridos, se utiliza la técnica de agregación 
+basada en reglas descrita en \ref{subsection:agregacion}. Si los dos boxeadores se derriban en el mismo asalto, este evento se realiza en 
+una misma oración. A su vez, si un mismo boxeador derriba a su openente en dos o más asaltos consecutivos estos derribos se expresan en la misma 
+oración.
+
+
+\subsubsection{Realización}
+
+    La realización se completa con la formación de las expresiones en base al llenado de las plantillas predefinidas hechas a mano. Para la 
+realización el modelo se apoyo en funciones léxicas y gramaticales que dotan al texto de mejor calidad. Una de las funciones léxicas se utiliza 
+para expresar el número de los asaltos en forma ordinal (ej. primer, segundo, tercer). A su vez una de las funciones gramaticales se emplea 
+desambiguar las expresiones de género que se incluyen en las plantillas. En base al género y el tipo de la expresión esta función expresa el concepto 
+en el género correspondiente (ej. boxeador y boxeadora, el púgil y la púgil). 
+
+    Como se hizo con el modelo anterior se realiza una breve descripción de la formación de las plantillas para 
+la expresión de la información en las distintas oraciones.
+
+    \textbf{Presentación}
+
+    Para la presentación se utilizan las plantillas de \textit{categoría}
+
+
 
