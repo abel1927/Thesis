@@ -2,7 +2,7 @@
 
 
     Los sistemas de GLN normalmente reciben los datos de forma estructurada, pero esta estructura puede variar de un sistema a otro.
-La naturaleza de los datos es diferente con lo cual sus representaciones pueden ir desde registros de bases de datos, bases de conocimiento, 
+La naturaleza de los datos es diferente con lo cual sus representaciones pueden ser desde registros de bases de datos, bases de conocimiento, 
 grafos de conocimiento, o estructuras intermedias que utilizan representaciones del tipo clave-valor como pudiera ser el formato JSON, entre otras. 
 Por ejemplo, en (~\cite{Yu2006ChoosingTC}) obtienen los datos en forma de series temporales, mientras que en (~\cite{kukich1983design}) los trabajan a 
 partir de una base de datos de registros financieros.
@@ -14,7 +14,7 @@ completa que sea aplicable a la mayoría de éstos sistemas (~\cite{ramos2016rol
 
  Sin embargo, la arquitectura propuesta por Riter y Dale en (~\cite{Reiter1997BuildingAN}) se ha tomado como el estandar de facto 
 dentro de este campo, lo que no implica que muchos sistemas no plantearan estructuras diferentes (~\cite{Perera2017RecentAI}). 
-Esta arquitectura de tubería (\emph{pipeline} en inglés), o modular, establece que los sistemas de GLN pueden dividirse en módulos 
+Esta arquitectura de flujo (\emph{pipeline} en inglés), o modular, establece que los sistemas de GLN pueden dividirse en módulos 
 que encapsulen distintas tareas dentro del proceso de generación del texto.
 
     
@@ -30,7 +30,7 @@ que encapsulen distintas tareas dentro del proceso de generación del texto.
 
 \section{Tareas principales de los sistemas de Generación de Lenguaje Natural}
 
-    Hasta hoy considerado como el punto de referencia y texto más completo en el campo de GLN (\cite{Gatt2018SurveyOT}), el libro de Ehud Riter y
+    Hasta hoy, considerado como el punto de referencia y texto más completo en el campo de GLN (\cite{Gatt2018SurveyOT}), el libro de Ehud Riter y
 Robert Dale: Building Natural Language Generation Systems (~\cite{reiter_dale_2000}), sienta las bases y define las que se han asumido como tareas principales 
 de un sistema de GLN:
 
@@ -46,7 +46,7 @@ de un sistema de GLN:
 
 Estas tareas naturalmente se puden dividir entre las que envuelven el proceso de elegir qué decir y de qué forma (planificación del contenido) 
 a partir de los datos, y las que tienen un carácter más orientado al proceso lingüístico de elegir los términos adecuados para la expresión 
-en si ( realización)( ~\cite{Gatt2018SurveyOT}). Cada una de estas tareas, aunque no presentes en su conjunto en todos los sistemas,  responden a distintos 
+en si (realización)(~\cite{Gatt2018SurveyOT}). Cada una de estas tareas, aunque no presentes en su conjunto en todos los sistemas,  responden a distintos 
 objetivos dentro de los mismos y existen distintas técnicas para cada una de ellas en la literatura.
     
 \subsection{Determinación del contenido}\label{subsection:selecciondelcontenido}
@@ -66,9 +66,9 @@ fútbol de la Liga Espa\~nola. Para la conformaci\'on del mismo describieron la 
 un estricto sistema de reglas para la selecci\'on de contenido. Es relevante este enfoque ya que con un conocimiento del dominio a tratar y de la intenci\'on comunicativa del texto a producir 
 es posible implementar reglas que den lugar a la selección del contenido relevante (~\cite{Reiter1997BuildingAN,reiter_dale_2000}). 
 
-    Como el proceso de creaci\'on de reglas puede ser tedioso y es dependiente del dominio (~\cite{Reiter1997BuildingAN}) aparecieron iniciativas para la automatizaci\'on de esta tarea. Un enfoque 
+    Como el proceso de creaci\'on de reglas puede ser tedioso y es dependiente del dominio (~\cite{Reiter1997BuildingAN}), aparecieron iniciativas para la automatizaci\'on de esta tarea. Un enfoque 
 basado en t\'ecnicas de aprendizaje autom\'atico es el presentado por Dubou\'e y McKeown (~\cite{Dubou2003StatisticalAO}). En este trabajo plantearon un modelo de aprendizaje supervisado que a trav\'es de
-un corpus de resultados deseados (texto escrito por humanos) aparejados con los tipos lingüísticos de la entrada (distintos tipos de datos que recibe el sistema) determina un conjunto de constantes. Estas constantes 
+un corpus de resultados deseados (texto escrito por humanos), aparejados con los tipos lingüísticos de la entrada (distintos tipos de datos que recibe el sistema), determina un conjunto de constantes. Estas constantes 
 expresan si determinado dato de entrada debe aparecer o no reflejado en la salida y bajo qué condiciones. Este sistema se utilizó para la generación de descripciones biográficas cortas que resumen hechos 
 importantes sobre personajes famosos.
 
@@ -81,13 +81,13 @@ de leer (~\cite{Reiter1997BuildingAN}).
     Los primeros enfoques para la estructuración de documentos se basaron en reglas estructuradas hechas a mano dependientes del dominio (~\cite{Gatt2018SurveyOT}). A este enfoque se le conoce como el enfoque basado en esquemas, nombre que 
 se deriv\'o del trabajo de Kathleen R. McKeown(~\cite{mckeown1985discourse}) cuando acu\~n\'o el t\'ermino \textit{"schematta"}. En la construcci\'on de su sistema TEXT(~\cite{mckeown1985discourse}), McKeown, luego del an\'alis de muchos 
 ejemplos del dominio, concluyó que dado un objetivo comunicativo, la información tiende a transmitirse en el mismo orden. En base a ésto defini\'o estructuras(esquemas) que determinan posibles combinaciones de atributos, formando patrones 
-y plantillas. De esta forma el sistema, dada una intenci\'on comunicativa, puede seleccionar un esquema que defina la forma de transmitir la información. La mayor\'ia de los sistemas que siguen este enfoque utilizan 
+y plantillas. De esta forma, el sistema, dada una intenci\'on comunicativa, puede seleccionar un esquema que defina la forma de transmitir la información. La mayor\'ia de los sistemas que siguen este enfoque utilizan 
 las Matrices de Valores de Atributos (AVMs por sus siglas en inglés, Attribute Value Matrics)(~\cite{Perera2017RecentAI}).
 
     Las estructuras ret\'oricas son otro de los mecanismos que se utilizan para la planificación. Estas se derivan del trabajo de Mann y Thompson quienes introdujeron la Teor\'ia de la Estructura Ret\'orica(RST por
 sus siglas en inglés, Rhetorical Structure Theory)(~\cite{mann1988rhetorical}). Las estructuras ret\'oricas constituyen un m\'etodo lingüístico para la descripci\'on de texto caracterizando las estructuras primarias del mismo y estableciendo 
 relaciones funcionales entre sus distintas partes. La RST tiene como base los conceptos de n\'ucleo y sat\'elite que definen las partes del texto entre las que se establece una relaci\'on. Los distintos sistemas que utilizan las estructuras ret\'oricas 
-para la estructuraci\'on del texto definen qué tipo de relaciones establecen. Ejemplo de relaciones lingüísticas planteadas por Mann y Thompson en su trabajo son: motivaci\'on, causa, condici\'on, circunstancia, entre otros (~\cite{mann1988rhetorical}). 
+para la estructuraci\'on del texto definen qué tipo de relaciones establecen. Ejemplos de relaciones lingüísticas planteadas por Mann y Thompson en su trabajo son: motivaci\'on, causa, condici\'on, circunstancia, entre otros (~\cite{mann1988rhetorical}). 
 
 \subsection{Agregación}\label{subsection:agregacion}
 
@@ -105,7 +105,7 @@ y a nivel sintáctico. Muchos de los primeros trabajos sobre agregación fueron 
     \item (2) Ronaldo anot\'o dos veces para el Real Madrid antes del minuto 8.
 \end{itemize}
 
-    En (2) se evita la repetici\'on y la información se presenta de forma m\'as fluida y natural al lector.
+    En el segundo caso, se evita la repetici\'on y la información se presenta de forma m\'as fluida y natural al lector.
     
 Los primeros trabajos de este tipo se basaron generalmente en la aplicacón de reglas hechas a mano (ejemplo ~\cite{Shaw1998ClauseAU}). Con el tiempo aparecieron propuestas que 
 utilizan enfoques de aprendizaje autom\'atico. SPoT es un sistema que se present\'o en ~\cite{walker2001spot}) 
@@ -117,14 +117,15 @@ si deben agregarse o no en función de su similitud por pares. Posteriormente, s
 de un grupo de restricciones.
 
     Con la agregación sintáctica podría decirse que es más factible definir reglas independientes del dominio para eliminar la 
-redundancia (~\cite{Gatt2018SurveyOT}). Por ejemplo, convertir (3) en (4) a continuación
+redundancia (~\cite{Gatt2018SurveyOT}). Esto podría lograrse identificando las frases verbales paralelas en las dos oraciones conjuntas y eliminando el sujeto y el verbo en la segunda. 
+Por ejemplo, convertir (3) en (4):
 
 \begin{itemize}
     \item (3) Ronaldo marcó en el minuto 2 y marcó de nuevo en el minuto 8.
     \item (4) Ronaldo marcó en el minuto 2 y de nuevo en el 8.
 \end{itemize}
     
-podría lograrse identificando las frases verbales paralelas en las dos oraciones conjuntas y eliminando el sujeto y el verbo en la segunda.
+
 
 \subsection{Lexicalización}\label{subsection:lexicalizacion}
 
@@ -140,17 +141,17 @@ descrito es un gol en propia puerta (~\cite{Gatt2018SurveyOT}).
     El proceso de lexicalización puede seguir dos vertientes principales. Una ser\'ia la realizaci\'on de la  
 lexicalización de la forma m\'as simple posible, lo cual se lleva a cabo generalmente utilizando t\'ecnicas para el llenado de 
 plantillas lexicalizadas. De otra forma se puede realizar este proceso en mayor profundidad utilizando t\'ecnicas m\'as complejas  
-que permmitan por ejemplo: la eliminaci\'on de palabras innecesarias, la selección de vocablos que maximicen la efectividad del objetivo 
-comunicativo del texto, la uni\'on de t\'erminos que se aparejan frecuentemente en el dominio (~\cite{Perera2017RecentAI}).
+que permitan, por ejemplo: la eliminaci\'on de palabras innecesarias, la selección de vocablos que maximicen la efectividad del objetivo 
+comunicativo del texto o la uni\'on de t\'erminos que se aparejan frecuentemente en el dominio (~\cite{Perera2017RecentAI}).
 
     Los enfoques basados en reglas son de los m\'as utilizados, pudiendo variar en complejidad entre un sistema y otro. \textit{EasyText}(~\cite{danlos2011easytext}) 
 es un ejemplo de sistema que utiliza reglas para la lexicalización pero que da un paso m\'as all\'a pues consume de una base de datos 
-l\'exica creada principalmente por lingüístas. Esta alternativa permite una lexicalización m\'as avanzada pero a su vez es altamente 
+l\'exica creada, principalmente, por lingüístas. Esta alternativa permite una lexicalización m\'as avanzada pero a su vez es altamente 
 costosa en recursos.
 
     La utilizaci\'on de ontolog\'ias tambi\'en est\'a presente en este proceso de los sistemas de GLN. El uso de ontologías permite 
 al sistema ganar en adaptabilidad ya que encontrar una ontología para un dominio determinado es más sencillo que encontrar un corpus para 
-el mismo. Asímismo ofrecen una mayor cobertura de las representaciones semánticas que los corpus (~\cite{Perera2017RecentAI}). En ~\cite{cimiano2013exploiting} introducen 
+el mismo. Asimismo, ofrecen una mayor cobertura de las representaciones semánticas que los corpus (~\cite{Perera2017RecentAI}). En ~\cite{cimiano2013exploiting} introducen 
 un modelo que utiliza este enfoque presentado en el dominio de las recetas de cocina.
 
 
@@ -167,14 +168,14 @@ busca determinar un conjunto de propiedades \'unicas que definan al objetivo y l
 puede ser de un pronombre (\'el/ella), una descripci\'on (Sim\'on, el jugador cubano) o en la generación de nombres propios (Frederich Cepeda/Cepeda). 
 Rither y Dale (~\cite{reiter_dale_2000}) plantean una diferencia entre una referencia temprana (primera vez que se menciona una 
 entidad en el texto) y una tard\'ia (cuando se refiera a una entidad mencionada anteriormente). Plantearon el uso de los nombres propios a la hora 
-de introducir una entidad, luego, en base a cla\'usulas seleccionar un pronombre apropiado, ejemplo:
+de introducir una entidad, luego, en base a cla\'usulas, seleccionar un pronombre apropiado, ejemplo:
 
 \begin{verbatim}
     si el referente fue mencionado en la oración anterior;
     entonces utiliza un pronombre
 \end{verbatim}
 
-a su vez es necesario considerar los escenarios donde la generaci\'on de expresiones de referencia pudiera llevar a ambigüedades:
+Es necesario también considerar los escenarios donde la generaci\'on de expresiones de referencia pudiera llevar a ambigüedades:
 
 \begin{itemize}
     \item Benzema anotó dos para el Real Madrid mientras Luka Modric brindó dos asistencias. Él fue elegido el jugador del partido... 
@@ -263,7 +264,7 @@ la generalización. Este modelo, no solo tuvo una buena actuación en cuanto a l
 del reentrenamiento, lo cual constituyó una diferencia respecto a los modelos neuronales tratados anteriormente.
 
 
-    Como quedó patente en (~\cite{wiseman-etal-2017-challenges,ferreira2019neural,duvsek2020evaluating,sharma2022innovations}) los sitemas basados en redes neuronales
+    Como quedó patente en (~\cite{wiseman-etal-2017-challenges,ferreira2019neural,duvsek2020evaluating,sharma2022innovations}) los sistemas basados en redes neuronales
 son capaces de producir texto que supera en fluidez y en evaluaciones humanas, como la naturalidad, a los sistemas tradicionales. Sin embargo, estos modelos siguen lidiando con su principal
 problema que es la presencia de alucinaciones en las salidas. Esta deficiencia es objeto de interés de los investigadores en este campo (~\cite{ji2022survey}). Por esta razón, Robert Dale, 
 en su \textit{Natural language generation: The commercial state of the art in 2020} (~\cite{dale2020natural}) planteó que estas soluciones, aunque prometedoras, se 
@@ -288,25 +289,26 @@ de jugadores y resúmenes de partidos de fútbol del juego \textit{Fotball Manag
 \textit{PostData\footnote[3]{http://www.postdata.club/index.html}}, un sitio de periodismo 
 de datos cubano, donde utilizan un modelo propio, \textit{ArmandBot} (~\cite{balboa2020}), para generar reportes sobre las actuaciones de los peloteros cubanos en grandes ligas.
 
-    En la literatura hay propuestos varios modelos de sitemas para la GLN en el ámbito del deporte. Por ejemplo, en (~\cite{kanerva2019template}), apoyados en la constucción de un corpus de 2000 encuentros de hockey sobre hielo 
+    En la literatura hay propuestos varios modelos de sistemas para la GLN en el ámbito del deporte. Por ejemplo, en (~\cite{kanerva2019template}), apoyados en la construcción de un corpus de 2000 encuentros de hockey sobre hielo, 
 proponen un modelo de secuencia a secuencia, para generar narrativas sobre esta práctica deportiva. Hasan (~\cite{hasan2011automatic}) propuso un sistema basado en plantillas que sigue la arquitectura tradicional basada en módulos para 
 generar texto en inglés y bengalí\footnote[5]{El bengalí es el idioma nacional y el idioma oficial de la República Popular de Bangladesh} para generar resúmenes de juegos de críquet a partir de datos estructurados obtenidos de la web. 
 Siguiendo el mismo enfoque, en ~\cite{gu2016incorporating} presentan otro sistema basado en plantillas para el críquet, en este caso al estilo propio de Sri Lanka.
  
-En el caso del fútbol, una de las principales propuestas fue GoalGetter (~\cite{theune2001data}), un sistema de datos a voz en idioma neerlandés, que consta de dos módulos, uno para tranformar los datos en texto y 
-otro para luego llevar el texto a sonido. GoalGetter tomó los datos de una página de Telexto que contenía los datos de uno o más partidos de fútbol. Una característica de este sistema es que propuso una arquitectura diferente al 
+En el caso del fútbol, una de las principales propuestas fue GoalGetter (~\cite{theune2001data}), un sistema de datos a voz en idioma neerlandés, que consta de dos módulos, uno para transformar los datos en texto y 
+otro para luego llevar el texto a sonido. GoalGetter tomó los datos de una página de Telexto que contenía la información de uno o más partidos de fútbol. Una característica de este sistema es que propuso una arquitectura diferente al 
 estándar modular de otros sistemas. En este caso, utilizó un solo módulo para la generación de texto que consumía una base de conocimiento con los nombres de los jugadores y equipos junto a un sistema de plantillas sintácticas.
-En base a este trabajo, en \cite{aires2016automatic} se propuso GameRecapper, un sistema capaz de generar resúmenes de partidos de fútbol de la liga portuguesa en idioma portugués. Este sistema obtenía los datos de \textit{www.zerozero.pt} 
+En base a este trabajo, en \cite{aires2016automatic} se propuso GameRecapper, un sistema capaz de generar resúmenes de partidos de fútbol de la liga portuguesa en idioma portugués. Este sistema obtenía los datos de \textit{www.zerozero.pt},
 una página web que contenía la información de los partidos de cada jornada. Al módulo de generación agregaron a su vez una base de conocimiento y un conjunto de funciones léxico semánticas para mejorar la calidad del texto. De este trabajo resaltó el hecho 
-de que hicieron una caracterización más amplia del evento principal del fútbol, el gol, en su sistema de plantillas. Para cada distinto escenario propusieron la creación de plantillas oracionales específicas (primer gol del patido, último gol, gol que empata, etc).
-Pass (~\cite{van2017pass}), es una propuesta basada en GoalGetter que busca diferenciar el texto producido en base a la audiencia del mismo. Para ello establecen un sistema de plantillas que abarca distintos posibles escenarios de resultado de un partido: victoria o derrota 
-del equipo local, victoria o derrota del equipo visitante o empate. La elección de cuál plantilla utilizar va en depencia de a qué afición irá dirigido el texto.  
+de que hicieron una caracterización más amplia del evento principal del fútbol, el gol, en su sistema de plantillas. Para cada escenario distinto propusieron la creación de plantillas oracionales específicas (primer gol del partido, último gol, gol que empata, etc).
+
+PASS (~\cite{van2017pass}), es una propuesta basada en GoalGetter que busca diferenciar el texto producido en base a la audiencia del mismo. Para ello establecen un sistema de plantillas que abarca distintos posibles escenarios de resultado de un partido: victoria o derrota 
+del equipo local, victoria o derrota del equipo visitante o empate. La elección de cuál plantilla utilizar va en dependencia de a qué afición irá dirigido el texto.  
 
     La gran mayoría de estos sistemas cuentan con un dominio específico de aplicación, así como cuentan con una fuente de datos de la 
 cual extraer la información a desarrollar. Por tanto, y aunque fuera posible la adaptabilidad, existe una dependencia de la fuente de información. A su vez, el tener un dominio bien definido  
 permite agregar bases de conocimiento previo del mismo que enriquezcan los modelos. Predominan los sistemas basados en plantillas y reglas, variando entre sí su nivel de complejidad. Estos 
 sistemas son especialmente adaptables y prácticos para idiomas distintos del inglés debido a que las herramientas de generación específicas desarrolladas son menores en comparación (~\cite{gunasiri2021automated}). 
-    En el presente trabajo se presenta un prototipo de sistema basado en la propuesta de un esquema general que permita definir esquemas específicos de entradas en formas de 4-tuplas (tuplas de cuatro elementos) de 
-conocimiento de un deporte de enfrentamiento dos a dos ( beisbol, voleibol, judo, etc). A su vez, se seleccionan dos deportes, en este caso, fútbol y boxeo, y a partir de las especificaciones planteadas se 
-definen dos modelos capaces de generar un resumen informativo del evento en cuestión. Los modelos siguen el estandar basado en reglas plantillas simples de expresiones y oraciones.
+    %En el presente trabajo se presenta un prototipo de sistema basado en la propuesta de un esquema general que permita definir esquemas específicos de entradas en formas de 4-tuplas (tuplas de cuatro elementos) de %
+%conocimiento de un deporte de enfrentamiento dos a dos ( beisbol, voleibol, judo, etc). A su vez, se seleccionan dos deportes, en este caso, fútbol y boxeo, y a partir de las especificaciones planteadas se %
+%definen dos modelos capaces de generar un resumen informativo del evento en cuestión. Los modelos siguen el estandar basado en reglas plantillas simples de expresiones y oraciones.%
 

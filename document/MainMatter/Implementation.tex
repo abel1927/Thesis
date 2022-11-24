@@ -77,59 +77,97 @@ Algoritmo principal
 
 
 
-\section{Sistema de plantillas}
+\section{Funciones de realización lingüística}
+
+   El proceso de realización lingüística se lleva a cabo utilizando un conjunto de funciones que permiten la expresión correcta de la información 
+en forma de oraciones. Para la representación de los datos los modelos consumen un sistema de plantillas hechas a mano. Un ejemplo de plantilla:
+
+	\begin{center}
+		\textit{$<$ portero $>$ atajó un penal a $<$ lanzador $>$ en el minuto $<$ minuto $>$}
+	\end{center}
+
+Las expresiones entre $<$ $>$ son las ranuras de las plantillas y se completan utilizando la información procesada de la entrada. Para facilitar la interpretación, 
+a la expresión contenida entre $<$ \textit{clave} $>$ se le denominará clave de ranura. Para cada contexto se conciben varias plantillas que permitan realizar la información, 
+de forma tal que existan distintas opciones a la hora de expresar una misma idea.
+
+  El proceso de selección y llenado de las plantillas se realiza a través de la función \emph{select\_template} (Algoritmo de selección de plantilla). 
+  Esta recibe como parámetros el conjunto de posibles plantillas a emplear, el género a realizar, así como un diccionario de representación de la 
+información donde las llaves coinciden con las posibles claves de ranura de las plantillas y los valores son los datos reales. 
 
 
-Para el llenado de la plantilla se utiliza la función select template, que a su vez emplea la función
-fille template  y genre desambiguation.
+  Como el sistema presenta cierto grado de sensibilidad ante la ausencia de algunos datos, es posible que haya plantillas para las que alguna ranura no tenga un 
+valor real. La función \emph{\_is\_valid\_template} se utiliza para comprobar esto. El algoritmo selecciona aleatoriamente una plantilla del conjunto, si es válida, 
+se selecciona, si no, se descarta y se repite el proceso. Siempre se garantiza que habrá un al menos una plantilla que sea funcional, ya que presentará las ranuras 
+correspondientes al subconjunto minimal que admite el sistema en ese contexto. Para comprobar la validez de la plantilla primero 
+se detectan las ranuras presentes en esta utilizando la siguiente expresión regular: \textit{(r'$<$ (?P$<$key$>$[a-zA-ZáéíóúÁÉÍÓÚ\_]*) $>$')}.
+  
+\begin{verbatim}
+Algoritmo de selección de plantilla
+    
+  Entrada: template_group:List[str], data_values:Dict[str,str], 
+           genre:Genre.M | Genre.F
+  Salida: str
+    
+    while not valid templat selected:
+        template_selected = choice(tempalte_group)
+        slots_values = []
+        slots = slot_reggex.findall(template_group)
+        for slot_value in slots:
+            slots_values.append(slot_value)
+        if __is_valid_template(slots_values, data_values):
+            filled_template = fill_template(template_selected, 
+                                slots_values, data_values)
+            return disambiguate_template(filled_template, gender)
+    return
+    
+\end{verbatim}   
 
-La función  select template recibe el conjunto de posibles plantillas a emplear en la situación así como un 
-diccionario de representación, donde las llaves constituyen las ranuras en las plantillas y los valores, el Valor
-de ese dato en el contexto.
 
-Como el sistema propuesto presenta cierto grado de sensibilidad ante la ausencia de datos, es posible
-que haya plantillas en el conjunto para la que alguna de sus ranuras no tiene valor. Para esto, el algoritmo
-selecciona automáticamente una plantilla del conjunto, si en el diccionario todas las ranuras tienen un valor 
-correspondiente se selecciona, si no, se descarta y se repite el proceso. Siempre se garantiza que habrá
-al menos una plantilla en el conjunto que funcione, porque presentará el subconjunto minimal de datos que
-admite el sistema en ese contexto. La plantilla seleccionada se rellena utilizando el  método fill template
-que sustituye las ranuras de la plantilla por el valor real.
-
-%##1
+  El método \emph{fill\_template} sustituye las ranuras de la plantilla por su valor real. Luego se pasa a desambiguar los términos de género. Como el sistema es 
+adaptable tanto a la modalidad femenina como masculina de los deportes, es necesario realizar las expresiones en el género correcto. Las ranuras de género están 
+presentes en algunas plantillas y tienen esta estructura: \$ clave \$. Estas ranuras se detectan igualmente utilizando una expresión regular similar a la vista 
+para las ranuras comunes. El caracter “@” también se utiliza dentro de las plantillas para hacer distinciones de género. Por ejemplo en la frase: \textit{
+amb@s se golpearon}, el “@” se sustituye por “a” o por “o” en dependencia del género. Este proceso se produce en la función \emph{disambiguate\_template}.
 
 
+
+Otras funciones se utilizan para mejorar el carácter léxico gramatical de las oraciones producidas. La función \emph{ordinal} transforma expresiones numéricas 
+en su expresión ordinal (primer, segundo,  tercer, ..., vigésimo). La función numeral transforma un valor numérico en su expresión léxica (uno, dos, tres). Esta 
+abarca los números desde el 1 al 20 y los múltiplos de 10 hasta 100. Una vez que todas las transformaciones sobre las plantillas han sido realizadas, la función 
+\emph{sentence\_lexical\_realization}, se utiliza para eliminar posibles errores, como espacios dobles, repetición de artículos (“el EL”), o corrige errores 
+transformando expresiones como “de el” en su forma correcta “del”.
 
 
 
 \section{Interfaz gráfica}
 
-
-%##2
-
-Para poder trabajar más fácil con la propuesta, se proporcionó una interfaz gáfica. Esta interfaz es sencilla
- y se concibió utilizando el framework de python streamlit. Se da la opción a los usuarios de aportar
+Para poder interactuar más fácil con la propuesta, se proporcionó una interfaz gráfica. Esta interfaz es sencilla
+y se concibió utilizando el \emph{framework} de \textit{python streamlit}. Se da la opción a los usuarios de aportar
  datos en forma de archivos, ya sea a partir de definir la ruta local o cargando directamente el archivo.
 
- Para permitir  esta interacción se concibió una estructura intermedia para poder representar las tuplas
- de entrada en base a archivos json.  Cada tupla se concibe de la forma "id"
+ Para permitir  esta interacción se concibió una estructura intermedia para poder representar las tuplas 
+de entrada en archivos \textit{.json} (ver fig\ref{fig_jsonexample}). Cada tupla se representa con las llaves: “1”, “2”,“3”,“4”
+donde cada valor correspondiente representa el valor de la tupla en esa posición. Si no se proporciona uno de los 
+valores, esa posición se considera vacía.
 
- donde cada valor representa el valor de la tupla............. en esa posición. Si no se proporciona uno de los 
- valores, esa posición se considera vacía. Ejemplo de representación se puede ver en imagen.
+    \begin{figure}[!]
+        \begin{center}
+            \includegraphics[scale=0.6]{Graphics/jsonexample.png}
+        \end{center}
+        \caption{Ejemplo de representación intermedia de una tupla de entrada en formato \textit{json}}
+        \label{fig_jsonexample}
+    \end{figure}
 
  Desde la primera interfaz se puede interactuar con el conjunto de datos de prueba que se concibieron
 junto a la propuesta. Para ello hay que seleccionar el deporte deseado y uno entre los eventos de prueba.
-El sistema mostrará el texto producido en pantalla, luego de presionar el botón "generar".
-
-
- 
+El sistema mostrará el texto producido en pantalla, luego de presionar el botón “generar”.
 
 
 
-
-%##3
-
-
-
-
-
-
+\begin{figure}[!]
+    \begin{center}
+        \includegraphics[width=\textwidth]{Graphics/GRED.png}
+    \end{center}
+    \caption{Interfaz del sistema}
+    \label{fig_interfaz}
+\end{figure}

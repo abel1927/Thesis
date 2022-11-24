@@ -3,16 +3,16 @@
 
 \section{Definición y modelo generador para el fútbol}
 
-    Es necesario antes de la introducción del modelo la definición del esquema específico que se utilizó para 
+    Es necesario, antes de la introducción del modelo, definir el esquema específico que se utilizó para 
 definir y validar las posibles entradas del sistema.
 
 \subsection{Esquema de entrada de datos}
 
-    La experiencia del autor sobre el dominio a tratar así como la consulta del sitio web \textit{whoscored.com} sirvieron para realizar la caracterización del 
+    La experiencia del autor sobre el dominio a tratar, así como la consulta del sitio web \textit{whoscored.com} sirvieron para realizar la caracterización del 
 fútbol como deporte. Trabajos previos que también abordaron este deporte para la generación de texto como (~\cite{theune2001data,aires2016automatic,van2017pass}) se tuvieron en cuenta. 
 El sitio \textit{whoscored.com} publica estadísticas y anotaciones de los eventos que ocurren durante un partido de fútbol y dispone de información de miles de encuentros.
 
-A partir de este análisis, se definió el esquema del fútbol como se muestra en \ref{tab:esquema_futbol}
+A partir de este análisis, se definió el esquema del fútbol como se muestra en \ref{tab:esquema_fútbol}
 
 \begin{table}[]
     \begin{center}
@@ -62,10 +62,10 @@ este trabajo evaluar la factibilidad de la obtención de los datos o su adaptabi
 
 \subsection{Generación del reporte}
 
-    Con el objetivo de generar rerportes resumidos de partidos de fútbol a patir de las tuplas de conocimiento de los partidos, el sistema propuesto adapta enfoques presentados 
+    Con el objetivo de generar reportes resumidos de partidos de fútbol a partir de las tuplas de conocimiento de los partidos, el sistema propuesto adapta enfoques presentados 
 en la literatura para esta problemática en idiomas distintos al español. La arquitectura general planteada se presenta en \ref{arquitecturadelmodelo} y constituye una 
 adaptación de la propuesta en (~\cite{aires2016automatic}) que a su vez sigue un enfoque basado en (~\cite{theune2001data}). A diferencia de ambas propuestas, el 
-presente sistema no consume bases de conocimiento del dominio específico a abordar ya que no se enfoca únicamente en una competición, sino que busca adaptarse al hecho 
+presente sistema no consume bases de conocimiento del dominio específico a abordar, ya que no se enfoca únicamente en una competición, sino que busca adaptarse al hecho 
 general de un partido de fútbol. 
 %Estos, lo mismo pueden pertenecer a eventos tipo Liga, donde los partidos duran 90 minutos y existen empates, o a eventos de eliminación 
 %directa donde los partidos deben tener una definición ya sea en tiempos extras o penales.
@@ -88,9 +88,9 @@ Se busca que el texto producido tenga cierto grado de variabilidad y que sea cor
 \subsubsection{Planificación de contenido}
 
     En orden de estructurar el texto a producir así como determinar los eventos relevantes de un partido se hizo un análisis basado en 
-corpus (~\cite{reiter_dale_2000}). Se seleccinaron 4 jornadas (las 22,23,24,25) de la Liga Española de Fútbol Profesional de la temporada 
-2021-2022. Así mismo se seleccinó dos medios de prensa que realizaron crónicas en español de estos partidos en su versión web. Estos medios 
-fueron: el \textit{Diario AS\footnote[1]{https://as.com/}} en su versión web \textit{As.com} y el sitio deportivo 
+corpus (~\cite{reiter_dale_2000}). Se seleccionaron 4 jornadas (las 22,23,24,25) de la Liga Española de Fútbol Profesional de la temporada 
+2021-2022. Asimismo, se seleccionaron dos medios de prensa que realizaron crónicas en español de estos partidos en su versión web. Estos medios 
+fueron: el \textit{Diario AS\footnote[1]{https://as.com/}}, en su versión web \textit{As.com}, y el sitio deportivo 
 \textit{ESPN Deportes\footnote[2]{https://espndeportes.espn.com/}}. Para determinar qué eventos eran narrados en cada crónica se 
 estudiaron los eventos ocurridos en cada partido anotados por una tercera fuente: el sitio estadístico \textit{www.whoscored.com}. 
 De los 40 juegos se hizo una selección de 15 que tuvieran presente la información en ambos medios para poder constrastar. Los resultados de las 
@@ -130,10 +130,9 @@ la mención de jugadores con una destacada actuación. En base a esto se defini�
 
     \textbf{Presentación}\\
 
-    Los juegos de fútbol presentan variedad en cuanto a sus momentos de decisión. Estos, lo mismo pueden pertenecer a eventos tipo Liga, donde los partidos 
+   Los juegos de fútbol son disímiles en cuanto a los momentos de decisión. Estos juegos, lo mismo pueden pertenecer a eventos tipo Liga, donde los partidos 
 duran 90 minutos y existen empates, o a eventos de eliminación directa donde los juegos deben tener una definición ya sea en tiempos extras 
-o en tandas de penales (\ref{fig_momentos_definicion}). Para cada uno de estos tipos de 
-definición se definen plantillas específicas a la hora de construir la presentación. Así mismo, en la presentación se incluye la información 
+o en tandas de penales (\ref{fig_momentos_definición}). Para cada uno de estos tipos de definición se definen plantillas específicas a la hora de construir la presentación. Asimismo, en la presentación se incluye la información 
 respectiva a la sede donde se desarrolla el encuentro.\\
 
     \begin{figure}[!]
@@ -147,7 +146,7 @@ respectiva a la sede donde se desarrolla el encuentro.\\
     \textbf{Eventos relevantes}\\
 
     Se determinó como eventos relevantes a incluir en el resumen aquellos que tienen una influencia directa 
-tanto en el resultado como en el transcurso del juego. Por tanto los eventos seleccionados son: los goles y asistencias, 
+tanto en el resultado como en el transcurso del juego. Por tanto los eventos seleccionados son: los goles, las asistencias, 
 las expulsiones y los fallos de penaltis. Cada uno de ellos se presenta en oraciones independientes y poseen plantillas de acuerdo 
 a su clasificación. En \ref{fig_clasificacioneventos} se muestran las distintas clasificaciones de los eventos relevantes.\\
 
@@ -163,8 +162,8 @@ a su clasificación. En \ref{fig_clasificacioneventos} se muestran las distintas
     \textbf{Jugador destacado}\\
 
     El conjunto de acciones que se pueden describir del juego (ver eventos en \ref{tab:esquema_futbol}) se utilizaron para 
-determinar el jugador más destacado del partido. Se planteó una heurística en base a asignar distinta aportación de valor a 
-las acciones. Así mismo, acciones negativas se penalizan con evaluaciones negativas. En \ref{tab:tablaheuristica} se muestan los valores utilizados.
+determinar el jugador más destacado del partido. Se planteó una heurística basada en asignar distinta aportación de valor a 
+las acciones. Así mismo, acciones negativas se penalizan con evaluaciones negativas. En \ref{tab:tablaheuristica} se muestran los valores utilizados.
 
 
 
@@ -189,7 +188,7 @@ las acciones. Así mismo, acciones negativas se penalizan con evaluaciones negat
     \end{tabular}r
     \end{center}
     \caption{Valores que aporta cada estadística}
-    \label{tab:tablaheuristica}
+    \label{tab:tablaheurística}
     \end{table}
 
     En busca de representar en cierta medida el valor subjetivo que tiene el gol como acción principal de un partido de fútbol se agrega valor a los jugadores que 
@@ -213,7 +212,7 @@ se asegura la calidad estructural del texto producido, así como permite dotar d
 ambos géneros se utilizan dentro de las plantillas expresiones como \textit{\$ palabra \$}, donde \textit{palabra} se sustituye por su expresión de 
 género correcta dentro del contexto a través de una de las funciones léxicas que se utilizan en el modelo. 
 
-    Cuando una oración queda estructurada en base a las expresiones que la conforman y los valores de las ranuras se rellenan con los datos reales, entonces 
+    Si una oración queda estructurada en base a las expresiones que la conforman y los valores de las ranuras se rellenan con los datos reales, entonces 
 se utiliza una función para dar formato a la oración. En dicha función se colocan las mayúsculas al comienzo de la oración así como el punto final. También se 
 eliminan los espacios en blanco que pudieran quedar de más por datos faltantes, y se corrigen situaciones como la repetición de artículos o de palabras.
     Las plantillas se utilizan dentro del modelo para conformar estructuras más complejas en forma de 
@@ -222,14 +221,14 @@ tal se analizará a continuación.\\
 
     \textbf{Presentación}\\
 
-    En el texto de presentación se busca expresar la información concerniente al resultado del partido, su cirscunstancia, así como el lugar donde se 
+    En el texto de presentación se busca expresar la información concerniente al resultado del partido, su circunstancia, así como el lugar donde se 
 realiza este. Se plantea en forma de oración que sigue una de estas estructuras de forma aleatoria:
     \begin{itemize}
         \item \textit{plantilla de estadio} $+$ ", " $+$ \textit{plantilla de resultado}
         \item \textit{plantilla de resultado} + \textit{plantilla de estadio}
     \end{itemize}
         
-Las \textit{plantilla de estadio} se escogen en relación a si se conoce o no el valor de la asistencia al partido, pudiendo tener las siguiente expresiones:
+Las \textit{plantilla de estadio} se escogen en dependencia de si se conoce o no el valor de la asistencia al partido, pudiendo tener las siguientes expresiones:
     \begin{itemize}
         \item \textit{con  $<$ asistencia $>$ hinchas en las gradas del estadio $<$ estadio $>$}
         \item \textit{en el estadio $<$ estadio $>$}
@@ -288,9 +287,9 @@ Las \textit{plantilla de resultado} se construyeron en distintos grupos en depen
 
     Para la expresión de los goles se utilizan las plantillas: \textit{tipo de gol}, \textit{resultado del gol}, 
     \textit{asistencia}, \textit{tiempo}. Para los goles se identifican cuatro tipos: autogol, gol de tiro libre, 
-    gol de penal y gol simple. A su vez, las cirscunstancias del partido condicionan a la hora de expresar el resultado 
+    gol de penal y gol simple. A su vez, las circunstancias del partido condicionan a la hora de expresar el resultado 
     de un gol. Se identifica que un gol puede ser el primer gol del partido, o el único gol del partido, o puede empatar 
-    un resutado, desempatar un resultado, aumentar la ventaja o disminuir la ventaja.
+    un resultado, desempatar un resultado, aumentar la ventaja o disminuir la ventaja.
     Se escoge entre 14 estructuras de oraciones de forma aleatoria a la hora de realizar una acción de gol. Se presentan tres 
     de estas estructuras, las restantes son variaciones estructurales de las mismas.
     
@@ -307,7 +306,7 @@ Las \textit{plantilla de resultado} se construyeron en distintos grupos en depen
     Ejemplos de construcciones:
 
     \begin{itemize}
-        \item \textit{con un libre directo, autor\_del\_gol aumentó la ventja de $<$ equipo\_del\_gol $>$ en el minuto $<$ minuto $>$}
+        \item \textit{con un libre directo, autor\_del\_gol aumentó la ventaja de $<$ equipo\_del\_gol $>$ en el minuto $<$ minuto $>$}
         \item \textit{autor\_del\_gol con un buen disparo a pase de $<$ asistente $>$, disminuyó la distancia en el marcador a los $<$ minuto $>$ minutos} 
     \end{itemize}
 
@@ -318,7 +317,7 @@ Las \textit{plantilla de resultado} se construyeron en distintos grupos en depen
     Cuando hay un jugador destacado se elige aleatoriamente sobre cuatro variaciones de esta estructura:
     
     \begin{itemize}
-        \item \textit{nombre\_del\_jugador + “, ” + posición\_del\_jugador + “ de ” + equipo + “, fue ” + plantilla\_mas\_valioso + “ con ” +  plantilla\_estadísticas}
+        \item \textit{nombre\_del\_jugador + “, ” + posición\_del\_jugador + “ de ” + equipo + “, fue ” + plantilla\_más\_valioso + “ con ” +  plantilla\_estadísticas}
     \end{itemize}
 
     Ejemplo de formación de la oración:
@@ -328,7 +327,7 @@ Las \textit{plantilla de resultado} se construyeron en distintos grupos en depen
     \end{itemize}
 
     Cuando no hay un jugador destacado, lo cual es casi garantía de que el partido tubo uno o ningún gol en base a la definición de la heurística planteada, se selecciona una 
-    \textit{plantilla de partido sin jugadores destacados}, que es una oración en si.
+    \textit{plantilla de partido sin jugadores destacados}, que es una oración en sí.
 
     Ejemplo de oración de partido sin jugadores destacados: \textit{en un partido parejo, no hubo ninguna actuación individual relevante}
 
@@ -361,7 +360,7 @@ A continuación se muestran  dos variantes distintas producidas por el modelo pa
 
 \section{Definición y modelo generador para el boxeo}
 
-    A diferencia del fútbol que fue tratado anteriormente, el boxeo es un deporte individual, cuya estructura de acciones es más monótona. Asímismo, 
+    A diferencia del fútbol que fue tratado anteriormente, el boxeo es un deporte individual, cuya estructura de acciones es más monótona. Asimismo, 
 las crónicas que tratan el boxeo, al menos las analizadas por el autor, no son tan variables y poseen un matiz informativo más restringido y directo. 
 Aún así, el boxeo fue elegido pues va a permitir ver qué nivel de representación se puede alcanzar y cuán abarcador es el esquema general 
 propuesto para conformar entradas de datos.
@@ -370,11 +369,11 @@ propuesto para conformar entradas de datos.
 
 Para analizar y hacer una abstracción de las características del boxeo y sus eventos más significativos se consultaron las crónicas sobre boxeo de 
 \textit{ESPN Deportes} y de \textit{Fightnews\footnote[1]{https://fightnews.com/}}, un sitio web dedicado a la cobertura del boxeo desde 1999. 
-Ademàs, se consultaron y estudiaron las reglas del boxeo profesional. Se utilizó la página del Consejo Mundial de 
+Además, se consultaron y estudiaron las reglas del boxeo profesional. Se utilizó la página del Consejo Mundial de 
 Boxeo\footnote[2]{https://wbcboxing.com/} (World Boxing Council) como referencia para las distintas categorías de pesaje tanto en boxeo masculino como en 
 boxeo femenino.
 
-A patir de este análisis se plantea el esquema de definición para la entrada de datos específicos del boxeo que se puede obervar en la figura \ref{tab:boxeo esquema}. 
+A partir de este análisis se plantea el esquema de definición para la entrada de datos específicos del boxeo que se puede observar en la figura \ref{tab:boxeo esquema}. 
 
 \begin{table}[]
     \begin{tabular}{|c|c|}
@@ -398,7 +397,7 @@ A patir de este análisis se plantea el esquema de definición para la entrada d
     \begin{itemize}
         \item Tupla \textbf{SEDE}: Las expresiones de \textit{asistencia} y \textit{capacidad} de no ser vacías deben ser expresiones numéricas (ej. “1200”).
         \item Tupla \textbf{TORNEO}: La expresión de \textit{género} debe ser una entre “M” y “F” (masculino, femenino). La expresión de \textit{categoría} se requiere 
-        y debe indicar una de las categoría de pesos permitidas en el boxeo profesional (ej, mosca, superpluma, completo, entre otros). En su defecto, se puede expresar un indicador con 
+        y debe indicar una de las categorías de pesos permitidas en el boxeo profesional (ej, mosca, superpluma, completo, entre otros). En su defecto, se puede expresar un indicador con 
         el formato “xxx\_lb” (“135\_lb”) del cual se infiere la categoría a partir del peso.
         \item Tupla \textbf{ENFRENTAMIENTO}: Las entidades son los nombres de los boxeadores que se enfrentan. La expresión de \textit{fecha}, de ser incluida, debe seguir
         el siguiente formato: “AAAA-MM-DD HH:MM” (año-mes-día hora:minutos). Es posible que se provea solo el día o la hora, respetando sus formatos específicos.
@@ -406,9 +405,9 @@ A patir de este análisis se plantea el esquema de definición para la entrada d
         \item Tupla \textbf{RESULTADOPARCIAL}: La entidad es el boxeador al que se refiere, el \textit{indicador de parcial} un número positivo que indica el asalto. La expresión de \textit{puntuación} 
         debe seguir el formato  “1\_XX\_2\_YY\_3\_ZZ” ej(1\_10\_2\_09\_3\_10) que indica la puntuación de cada juez al boxeador en cuestión.
         \item Tupla \textbf{RESULTADOFINAL}: La entidad es el boxeador al que se refiere, la expresión de \textit{puntuación} debe seguir el formato  “1\_XXX\_2\_YYY\_3\_ZZZ” ej(1\_098\_2\_097\_3\_098)
-        que representa las votaciones acumuladas de cada juez para el boxeador en cuestión. El \textit{descriptor de resultado} tiene el formato “R\_TR” donde “R” es uno entre entre “V” (victoria), “E” (empate),
+        que representa las votaciones acumuladas de cada juez para el boxeador en cuestión. El \textit{descriptor de resultado} tiene el formato “R\_TR” donde “R” es uno entre “V” (victoria), “E” (empate),
         “D” (derrota) y “TR” uno entre “DU”(unánime), “DD” (dividida), “DM” (mayoritaria), “KO” (nocaut), “DS” ( descalificación), “DT” (técnica), “DA” (abandono).
-        \item Tupla \textbf{EVENTO}: La \textit{expresión temporal} tiene el siguiente formato: “rr\_sss” (ej. “04\_060”, al minuto del cuarto asalto) , donde “rr” indica el asalto y “sss” los segundos transcurridos. 
+        \item Tupla \textbf{EVENTO}: La \textit{expresión temporal} tiene el siguiente formato: “rr\_sss” (ej. “04\_060”, al minuto del cuarto asalto) donde “rr” indica el asalto y “sss” los segundos transcurridos. 
         La entidad \textit{protagonista} es el boxeador que protagoniza el evento.
     \end{itemize}
 
@@ -443,7 +442,7 @@ reportes tomados desde cada uno de los medios:
 
     \textbf{Presentación}\\
 
-    El algoritmo del modelo de generación primeramente extrae los datos generales referentes a la sede, la categoría, los 
+    El algoritmo del modelo de generación primeramente extrae los datos generales referentes a la sede, la categoría y los 
 boxeadores. Luego, chequea el tipo de resultado que tuvo la pelea en función de lo expresado en las tuplas de resultado final.
 Se comprueba si no es incongruente respecto a los eventos; ejemplo, no hay un nocaut en los eventos y el veredicto final indica que el 
 combate se decidió por los jueces. A partir de determinar el tipo de resultado es posible que se determine la plantilla correspondiente para 
@@ -457,24 +456,23 @@ ambos boxeadores.\\
 
     \textbf{Derribos}\\
 
-    Para determinar los derribos ocurridos en el combate lo primero que se hace e rdenar por tiempo de 
+    Para determinar los derribos ocurridos en el combate lo primero que se hace es ordenar por tiempo de 
 ocurrencia de los eventos. A partir de identificar un \textit{ConteoProtecciónSuperado}, se identifica el golpe previo y el asalto, 
 datos con los cuales se identifica el derribo. Luego de identificados todos los derribos ocurridos, se utiliza la técnica de agregación 
-basada en las reglas descritas en \ref{subsection:agregacion}. Si los dos boxeadores se derriban en el mismo asalto, este evento se realiza en 
-una misma oración. A su vez, si un mismo boxeador derriba a su openente en dos o más asaltos consecutivos estos derribos se expresan en la misma 
+basada en las reglas descritas en \ref{subsection:agregación}. Si los dos boxeadores se derriban en el mismo asalto, este evento se realiza en 
+una misma oración. A su vez, si un mismo boxeador derriba a su oponente en dos o más asaltos consecutivos estos derribos se expresan en la misma 
 oración.
 
 
 \subsubsection{Realización}
 
-    La realización se completa con la formación de las expresiones en base al llenado de las plantillas predefinidas hechas a mano. Para la 
+    La realización se completa con la formación de las expresiones a partir de las plantillas predefinidas, hechas a mano. Para la 
 realización el modelo se apoyó en funciones léxicas y gramaticales que dotan al texto de mejor calidad. Una de las funciones léxicas se utiliza 
 para expresar el número de los asaltos en forma ordinal (ej. primer, segundo, tercer). A su vez una de las funciones gramaticales se emplea para
-desambiguar las expresiones de género que se incluyen en las plantillas. En base al género y el tipo de la expresión esta función expresa el concepto 
+desambiguar las expresiones de género que se incluyen en las plantillas. Basado en el género de la modalidad y en el contexto de la expresión, esta función expresa el concepto 
 en el género correspondiente (ej. boxeador y boxeadora, el púgil y la púgil). 
 
-    Como se hizo con el modelo anterior se realiza una breve descripción de la formación de las plantillas para 
-la expresión de la información en las distintas oraciones.\\
+    Como se hizo con el modelo anterior, se realiza una breve descripción de la formación de las plantillas para la expresión de la información en las distintas oraciones.\\
 
     \textbf{Presentación}\\
 
@@ -497,8 +495,8 @@ con estructura variable jugando con las estructuras propias de las plantillas.
         \item \textit{ en el $<$ estadio $>$, en la categoría de peso $<$ categoría $>$, con un fuerte recto de derecha $<$ ganador $>$ noqueó a $<$ perdedor $>$}
     \end{itemize}
 
-    Para que el modelo tuviera más complejidad en cuanto a las estructuras de la salida, para la presentación se construyeron dos 
-plantillas especiales para variar la forma de las oraciones. Estas fueron las \textit{plantillas de prepresentación} y las 
+    Con el objetivo de que el modelo tuviera más complejidad en cuanto a las estructuras de la salida, para la presentación se construyeron dos 
+plantillas especiales con el fin de variar la forma de las oraciones. Estas fueron las \textit{plantillas de presentación} y las 
 \textit{plantillas de postsede}.
     Ejemplos:
     \begin{itemize}
@@ -526,7 +524,7 @@ Las \textit{plantillas de votación} y las \textit{plantillas de complemento de 
 
     Ejemplo de construcción:
     \begin{itemize}
-        \item los jueces calificaron  la pelea $<$ votos $>$ a favor de $<$ ganador $>$
+        \item los jueces calificaron la pelea $<$ votos $>$ a favor de $<$ ganador $>$
     \end{itemize}
 
 
@@ -551,7 +549,7 @@ Las \textit{plantillas de votación} y las \textit{plantillas de complemento de 
     \end{itemize}
     Ejemplo de construcción:
     \begin{itemize}
-        \item \textit{ $<$ protagonista $>$ hizo vistar la lona a $<$ antagonista $>$ en el segundo y cuarto asalto}
+        \item \textit{ $<$ protagonista $>$ hizo visitar la lona a $<$ antagonista $>$ en el segundo y cuarto asalto}
     \end{itemize}
 
     Para cuando existen derribos de ambos contrincantes en el mismo asalto, las \textit{plantillas de derribo doble} se realiza como 
@@ -562,8 +560,8 @@ una única oración.
 
 \subsection{Resultado}
 
-    El modelo es capaz de generar los reportes en base a la estructura planteada con independencia de la fuente de datos. 
-Se logró definir un esquema para el boxeo en base al esquema general planteado. De la misma forma, durante la construcción de juegos 
+    El modelo es capaz de generar los reportes basado en la estructura planteada con independencia de la fuente de datos. 
+Se logró definir un esquema para el boxeo basado en el esquema general planteado. De la misma forma, durante la construcción de juegos 
 de datos para probar la propuesta se detectó que no abundan los sitios que describen el boxeo en función de eventos detallados. No es 
 objetivo de este trabajo evaluar la capacidad de encontrar datos que puedan ser adecuados al esquema propuesto. Se entiende será parte de 
 futuros trabajos.

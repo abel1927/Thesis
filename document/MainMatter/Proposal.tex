@@ -3,7 +3,7 @@
     El objetivo de desarrollar un sistema para generar resúmenes de eventos deportivos independiente de la fuente de datos 
 planteó distintos retos. El primero de estos fue la necesidad de definir un esquema que permitiera abstraer las características 
 generales del conjunto de deportes de enfrentamiento (enfrentamiento dos a dos). Junto con dicho esquema se necesitó 
-deifinir una estructura común para la entrada de los datos que permitiera expresar los conocimientos del dominio. Se seleccionó 
+definir una estructura común para la entrada de los datos que permitiera expresar los conocimientos del dominio. Se seleccionó 
 una estructura basada en tuplas de cuatro elementos (cuatro-tuplas en lo adelante). A partir de esta estructura y en base 
 al esquema de definición general se buscó poder determinar esquemas específicos para cada deporte que se fuera a incluir en el 
 sistema. Cada uno de estos esquemas específicos son los que se encargan de definir un deporte de forma individual dentro del sistema.
@@ -14,7 +14,7 @@ resúmenes de partidos de fútbol. Lo mismo se realizó con un deporte de natura
 \section{Propuesta de Esquema General}
 
     Los deportes se pueden clasificar en la categoría de individuales o colectivos. En los deportes colectivos, las representaciones 
-del enfrentamiento ocurren en base a equipos que agrupan a individuos. A su vez en los deportes individuales son dos los contendientes.
+del enfrentamiento ocurren en base a equipos que agrupan a individuos. A su vez, en los deportes individuales son dos los contendientes.
 Esta es la primera diferencia que se extrae en el análisis del conjunto de deportes. Las modalidades analizadas están representadas en \ref{tab:table_deportes_seleccionados}, 
 clasificadas en individuales o colectivas.
 
@@ -40,22 +40,22 @@ clasificadas en individuales o colectivas.
 
     \begin{itemize}
         \item Naturaleza de decisión: La mayoría de los deportes se definen como juegos 
-        adversariales por acumulación de puntos. La entidad con mayor puntuación gana. Otros como el tenis y el voleibol 
-        se definen por cantidad de etapas ganadas (sets), y cada etapa se gana por puntos. A su vez en el boxeo la definición 
+        adversariales por acumulación de puntos. La entidad con mayor puntuación gana. Otros, como el tenis y el voleibol 
+        se definen por cantidad de etapas ganadas (sets), y cada etapa se gana por puntos. A su vez, en el boxeo la definición 
         se deriva de votaciones de árbitros.
-        \item Posibilidad de empate: Hay deportes como el fútbol que según la competición existe la posibilidad de 
-        definirse sin ganadores ni perdedores
-        \item Division de los eventos: La mayoría de los eventos se divide por etapas de tiempo
+        \item Posibilidad de empate: Hay deportes como el fútbol en el que, según la competición o la fase de ésta, existe la posibilidad de 
+        definirse sin ganadores ni perdedores.
+        \item División de los eventos: La mayoría de los eventos se divide por etapas de tiempo.
         constante. Una excepción es el judo que ocurre de forma continua durante cuatro minutos. 
-        \item Alargues de tiempo: La mayoría de los deportes, en caso de no definición en su tiempo reglamentario presentan 
-        etapas adicionales en forma punto de oro (ej. judo),  tiempos extras (ej. béisbol, fútbol), tiebreak (desemapte, ej. Voleibol, tenis).
+        \item Alargues de tiempo: La mayoría de los deportes, en caso de no definición en su tiempo reglamentario, presentan 
+        etapas adicionales en forma punto de oro (ej. judo),  tiempos extras (ej. béisbol, fútbol), tiebreak (desempate, ej. voleibol, tenis).
         \item Roles: Dentro de los deportes los participantes ejercen roles, como puede ser su posición en los deportes colectivos. En los deportes 
         individuales estos roles no son tan explícitos.
         \item  Acciones principales: La definición de los eventos son las acciones relevantes que ocurren durante el tiempo de juego.
     \end{itemize}
 
     Del análisis también se extrajeron un conjunto de características que son comunes a los enfrentamientos deportivos: la sede, 
-el público, la fecha. Asímismo, los enfrentamientos normalmente se encuadran dentro de un torneo, y existen distintiones entre categorías lo mismo sea 
+el público, la fecha. Asimismo, los enfrentamientos normalmente se encuadran dentro de un torneo, y existen distinciones entre categorías lo mismo sea 
 de edad, sexo, u de otro tipo (ej. peso).
 
     A partir del análisis se definió un meta esquema general de tipos de entradas basado en una estructura de 
@@ -83,7 +83,7 @@ cuatro-tuplas de conocimiento.
 
     Cada cuatro-tupla tiene en la primera posición el tipo de entrada. El resto de los valores constituyen la base de información. Con cada tipo de entrada 
 se encapsula un subconjunto de la información que se muestra, común al conjunto de deportes estudiados. 
-    A patir del meta esquema general, es posible definir los esquemas específicos de cada deporte, con sus tipos particulares para cada entrada y su forma de interpretar 
+    A partir del meta esquema general, es posible definir los esquemas específicos de cada deporte, con sus tipos particulares para cada entrada y su forma de interpretar 
 cada uno de los valores. Los esquemas de cada deporte tienen que ser capaces de poder expresar la información del mismo para poder, a través de ella, 
 generar textos que describan el enfrentamiento. \\
 
@@ -112,7 +112,7 @@ generar textos que describan el enfrentamiento. \\
             \begin{itemize}
                 \item (EVENTO, tiempo\_x , individuo\_A, “”): En el tiempo\_x, el individuo\_A protagonizó el EVENTO
                 \item (EVENTO, tiempo\_y, individuo\_A, individuo\_B): En el tiempo\_y, individuo\_A protagonizó el EVENTO en 
-                complemento de (en oposición de, en beneficio de, en perjucio de, en relación con, respecto a) individuo\_B. 
+                complemento de (en oposición de, en beneficio de, en perjuicio de, en relación con, respecto a) individuo\_B. 
             \end{itemize}
     \end{itemize}
 
@@ -125,36 +125,36 @@ generar textos que describan el enfrentamiento. \\
 
     Primero, es necesario tener en cuenta que el meta esquema planteado anteriormente busca la abstracción de conceptos comunes. Estos 
 conceptos necesitan, al menos los referentes a los roles, eventos y resultados, ser llevados a su expresión específica dentro de una modalidad 
-deportiva. A su vez, se debe diferenciar los conceptos de: capacidad de representación y obligación de representación. Que el esquema permita definir 
+deportiva. A su vez, se deben diferenciar los conceptos de: capacidad de representación y obligación de representación. Que el esquema permita definir 
 un tipo de información determinada no significa que todos los deportes expresen necesariamente ese concepto. Además es posible que se conciban distintos 
-esquemas específicos para un mismo deporte. Esto depende de como cada modelo sea representado.
+esquemas específicos para un mismo deporte. Esto depende de cómo cada modelo sea representado.
 
     La representación de un deporte en un esquema específico a partir del esquema general propuesto necesita del análisis de sus características. 
-Hacer un estudio que permita detallar las situaciones que presenta el deporte y representar estas en base a eventos. A partir de 
-estudiar las reglamentaciones, se separa al deporte en cuanto a su categoría de individual o colectivo. 
+Se debe realizar un estudio que permita detallar las situaciones que presenta el deporte y representarlas basado en eventos. A partir de 
+estudiar las reglamentaciones, se separa al deporte en cuanto a su categoría: individual o colectivo. 
 
     Para los deportes colectivos la expresión de los roles de los deportistas se encuentra mínimamente definida a partir del concepto de 
-alineación. Esta serie de deporte, tiene un conunto de individuos que inician las disputas de los encuentros y otros que ingresan a raíz de decisiones 
+alineación. Esta serie de deporte tiene un conjunto de individuos que inician las disputas de los encuentros y otros que ingresan a raíz de decisiones 
 que se toman durante el transcurso del evento. Además, se pueden expresar conceptos como las disposiciones que ocupa cada deportista dentro del equipo. En este 
 tipo de información, la \textit{entidad complementaria} que define la tupla de \textit{ROLENJUEGO} sería el equipo del deportista.
-    En el caso de los deportes individuales, los roles no se expresan tan claramente. Aún así, es posible identificar roles de representación, ya sea de un 
-país, una delegación, un equipo multi categoría. Un ejemplo fuera de los deportes de enfrentamiento se encuntra en la fórmula 1, donde los competidores 
+    En el caso de los deportes individuales, los roles no se expresan tan claramente. Aun así, es posible identificar roles de representación, ya sea de un 
+país, una delegación, un equipo multi categoría. Un ejemplo fuera de los deportes de enfrentamiento se encuentra en la fórmula 1, donde los competidores 
 representan a escuderías durante las carreras.
 
     En lo referido a los parciales, se necesita determinar las etapas en las que trascurre un enfrentamiento en caso de que este ocurra por etapas. La información 
-de los parciales permite al sistema desambiguar situaciones que ocurren duranto los enfrentamientos, así como da la posibilidad de dotar de más información 
+de los parciales permite al sistema desambiguar situaciones que ocurren durante los enfrentamientos, así como da la posibilidad de dotar de más información 
 la narrativa. Para conformar las tuplas de \textit{RESULTADOPARCIAL}, es necesario determinar si existe uno o m\'as tipos de segmentación dentro del enfrentamiento, así como 
 lograr una expresión identificativa que sea única para cada una.
 
-    La expresión de los eventos es la que dota principalmente de capacidad desciptiva a los modelos. Los eventos, acciones, que se suceden en un deporte son la escencia de 
-este y como tal, la escencia de la información que sobre ellos se transmite, más allá del resultado. Para expresar los eventos es necesario en primera instancia determinar cuáles 
+    La expresión de los eventos es la que dota principalmente de capacidad descriptiva a los modelos. Los eventos, acciones que se suceden en un deporte, son la esencia de 
+este y por esa razón son la información fundamental que sobre ellos se transmite, más allá del resultado. Para expresar los eventos es necesario en primera instancia determinar cuáles 
 son los que existen dentro de la modalidad seleccionada. A partir de esto, definir si para su expresión es necesario el concepto de antagonista como sujeto no protagonista en la acción.
 También se debe determinar una expresión temporal que identifique de forma única y cronológica la secuencia de eventos. De esta forma, no se generan ambigüedades a la hora de que los 
 modelos interpreten los mismos.
 
-    Los datos referentes a la sede, el público, el torneo, el resultado, las categorías se expresan de forma más directa. Queda en decisión del realizador del esquema y su modelo específico, 
-determinar que informaciones constituyen un requerimiento en el contexto de la generación del resumen y cuales son complementos informativos y como tal el sistema tiene 
-capacidad de lidiar con su ausencia. 
+    Los datos referentes a la sede, el público, el torneo, el resultado y las categorías se expresan de forma más directa. Queda en decisión del realizador del esquema y su modelo específico, 
+determinar qué informaciones constituyen un requerimiento en el contexto de la generación del resumen y cuáles son complementos informativos. Es decir, el modelo sería capaz de lidiar con 
+la ausencia de determinados datos. 
 
 
 
