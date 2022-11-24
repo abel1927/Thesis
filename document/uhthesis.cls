@@ -21,12 +21,18 @@
 \RequirePackage[nottoc,notlof,notlot]{tocbibind}
 \RequirePackage{footmisc}
 \RequirePackage{csquotes}
+%\RequirePackage[
+%	style=apa,
+%	citestyle=authoryear,
+%  hyperref=true,
+%	backref=true
+%	]{biblatex}
 \RequirePackage[
-	style=apa,
-	citestyle=authoryear,
+  style=numeric,
+  citestyle=numeric,
   hyperref=true,
-	backref=true
-	]{biblatex}
+  backref=true
+  ]{biblatex}
 \RequirePackage[linktocpage,breaklinks,colorlinks,%
                 linkcolor=black,anchorcolor=black,citecolor=black,%
                 filecolor=black,menucolor=black,runcolor=black,%
@@ -125,6 +131,20 @@
      {}%
    \multicitedelim}
   {\usebibmacro{textcite:postnote}}
+
+\DeclareCiteCommand{\brackcite}[\mkbibbrackets]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+    \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\brackcite}[\mkbibbrackets]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+    \printtext[bibhyperref]{\usebibmacro{citeyear}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
 
 % % Backreferences in the bibliography.
 % \backrefspanish

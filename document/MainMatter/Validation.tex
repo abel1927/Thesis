@@ -1,5 +1,13 @@
 \chapter{Validación. Modelos de generación para el fútbol y el boxeo}\label{chapter:validation}
 
+    Para validar la propuesta de representación presentada en el capítulo anterior, se planteó la concepción de 
+dos modelos generadores que partieran de la representación de los datos a partir del meta esquema propuesto. Se seleccionaron 
+el fútbol y el boxeo como deportes sobre los cuales concebir el sistema. Se selecciona el fútbol porque es un deporte colectivo, 
+con una dinámica de acciones constantes,  con muchos eventos de distinta naturaleza y distintas etapas de definición del resultado. 
+Mientras, el boxeo es una contraparte, en cuanto a que es un deporte individual, de carácter más monótono respecto a las acciones que 
+lo definen así como presenta un sistema de definición variado y de mayor complejidad respecto a otros deportes.  
+
+    Para ambos casos se modeló un esquema de entrada de datos siguiendo la metodología propuesta.
 
 \section{Definición y modelo generador para el fútbol}
 
@@ -9,10 +17,10 @@ definir y validar las posibles entradas del sistema.
 \subsection{Esquema de entrada de datos}
 
     La experiencia del autor sobre el dominio a tratar, así como la consulta del sitio web \textit{whoscored.com} sirvieron para realizar la caracterización del 
-fútbol como deporte. Trabajos previos que también abordaron este deporte para la generación de texto como (~\cite{theune2001data,aires2016automatic,van2017pass}) se tuvieron en cuenta. 
+fútbol como deporte. Trabajos previos que también abordaron este deporte para la generación de texto \brackcite{theune2001data,aires2016automatic,van2017pass} se tuvieron en cuenta. 
 El sitio \textit{whoscored.com} publica estadísticas y anotaciones de los eventos que ocurren durante un partido de fútbol y dispone de información de miles de encuentros.
 
-A partir de este análisis, se definió el esquema del fútbol como se muestra en \ref{tab:esquema_fútbol}
+A partir de este análisis, se definió el esquema del fútbol como se muestra en \ref{tab:esquema_futbol}
 
 \begin{table}[]
     \begin{center}
@@ -64,7 +72,7 @@ este trabajo evaluar la factibilidad de la obtención de los datos o su adaptabi
 
     Con el objetivo de generar reportes resumidos de partidos de fútbol a partir de las tuplas de conocimiento de los partidos, el sistema propuesto adapta enfoques presentados 
 en la literatura para esta problemática en idiomas distintos al español. La arquitectura general planteada se presenta en \ref{arquitecturadelmodelo} y constituye una 
-adaptación de la propuesta en (~\cite{aires2016automatic}) que a su vez sigue un enfoque basado en (~\cite{theune2001data}). A diferencia de ambas propuestas, el 
+adaptación de la propuesta de Aires \brackcite{aires2016automatic} que a su vez sigue un enfoque basado en la propuesta de Theune y col. \brackcite{theune2001data}. A diferencia de ambas propuestas, el 
 presente sistema no consume bases de conocimiento del dominio específico a abordar, ya que no se enfoca únicamente en una competición, sino que busca adaptarse al hecho 
 general de un partido de fútbol. 
 %Estos, lo mismo pueden pertenecer a eventos tipo Liga, donde los partidos duran 90 minutos y existen empates, o a eventos de eliminación 
@@ -88,7 +96,7 @@ Se busca que el texto producido tenga cierto grado de variabilidad y que sea cor
 \subsubsection{Planificación de contenido}
 
     En orden de estructurar el texto a producir así como determinar los eventos relevantes de un partido se hizo un análisis basado en 
-corpus (~\cite{reiter_dale_2000}). Se seleccionaron 4 jornadas (las 22,23,24,25) de la Liga Española de Fútbol Profesional de la temporada 
+corpus \brackcite{reiter_dale_2000}. Se seleccionaron 4 jornadas (las 22,23,24,25) de la Liga Española de Fútbol Profesional de la temporada 
 2021-2022. Asimismo, se seleccionaron dos medios de prensa que realizaron crónicas en español de estos partidos en su versión web. Estos medios 
 fueron: el \textit{Diario AS\footnote[1]{https://as.com/}}, en su versión web \textit{As.com}, y el sitio deportivo 
 \textit{ESPN Deportes\footnote[2]{https://espndeportes.espn.com/}}. Para determinar qué eventos eran narrados en cada crónica se 
@@ -132,7 +140,7 @@ la mención de jugadores con una destacada actuación. En base a esto se defini�
 
    Los juegos de fútbol son disímiles en cuanto a los momentos de decisión. Estos juegos, lo mismo pueden pertenecer a eventos tipo Liga, donde los partidos 
 duran 90 minutos y existen empates, o a eventos de eliminación directa donde los juegos deben tener una definición ya sea en tiempos extras 
-o en tandas de penales (\ref{fig_momentos_definición}). Para cada uno de estos tipos de definición se definen plantillas específicas a la hora de construir la presentación. Asimismo, en la presentación se incluye la información 
+o en tandas de penales (\ref{fig_momentos_definicion}). Para cada uno de estos tipos de definición se definen plantillas específicas a la hora de construir la presentación. Asimismo, en la presentación se incluye la información 
 respectiva a la sede donde se desarrolla el encuentro.\\
 
     \begin{figure}[!]
@@ -191,12 +199,12 @@ las acciones. Así mismo, acciones negativas se penalizan con evaluaciones negat
     \label{tab:tablaheurística}
     \end{table}
 
-    En busca de representar en cierta medida el valor subjetivo que tiene el gol como acción principal de un partido de fútbol se agrega valor a los jugadores que 
-consiguen más de una anotación. Si un jugador anota dos goles se le suma medio punto, si anota tres, 1, y si consigue más de tres goles se le adicionan 3 puntos. 
-Si un jugador anota el gol de la victoria de su equipo, se le 
-adiciona un punto.  Se considera gol de la victoria al último gol del partido si la diferencia final entre los dos equipos es de un solo gol. A los 
-jugadores de corte defensivo (portero y defensas) también se les agrega un punto si su equipo no recibe goles. Los jugadores del equipo que resulta derrotado ven 
-reducido sus puntos en un diez por ciento. El jugador con mayor puntuación del partido se considera el hombre del partido.
+%    En busca de representar en cierta medida el valor subjetivo que tiene el gol como acción principal de un partido de fútbol se agrega valor a los jugadores que 
+%consiguen más de una anotación. Si un jugador anota dos goles se le suma medio punto, si anota tres, 1, y si consigue más de tres goles se le adicionan 3 puntos. 
+%Si un jugador anota el gol de la victoria de su equipo, se le 
+%adiciona un punto.  Se considera gol de la victoria al último gol del partido si la diferencia final entre los dos equipos es de un solo gol. A los 
+%jugadores de corte defensivo (portero y defensas) también se les agrega un punto si su equipo no recibe goles. Los jugadores del equipo que resulta derrotado ven 
+%reducido sus puntos en un diez por ciento. El jugador con mayor puntuación del partido se considera el hombre del partido.
 
 
 
@@ -362,8 +370,8 @@ A continuación se muestran  dos variantes distintas producidas por el modelo pa
 
     A diferencia del fútbol que fue tratado anteriormente, el boxeo es un deporte individual, cuya estructura de acciones es más monótona. Asimismo, 
 las crónicas que tratan el boxeo, al menos las analizadas por el autor, no son tan variables y poseen un matiz informativo más restringido y directo. 
-Aún así, el boxeo fue elegido pues va a permitir ver qué nivel de representación se puede alcanzar y cuán abarcador es el esquema general 
-propuesto para conformar entradas de datos.
+%Aún así, el boxeo fue elegido pues va a permitir ver qué nivel de representación se puede alcanzar y cuán abarcador es el esquema general 
+%propuesto para conformar entradas de datos.
 
 \subsection{Esquema de entrada de datos}
 
