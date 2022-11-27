@@ -1,14 +1,15 @@
 \chapter{Propuesta}\label{chapter:proposal}
  
-    El objetivo de desarrollar un sistema para generar resúmenes de eventos deportivos independiente de la fuente de datos 
+    El objetivo de proponer el diseño de un sistema para generar resúmenes de eventos deportivos independiente de la fuente de datos 
 planteó distintos retos. El primero de estos fue la necesidad de definir un esquema que permitiera abstraer las características 
 generales del conjunto de deportes de enfrentamiento (enfrentamiento dos a dos). Junto con dicho esquema se necesitó 
 definir una estructura común para la entrada de los datos que permitiera expresar los conocimientos del dominio. Se seleccionó 
 una estructura basada en tuplas de cuatro elementos (cuatro-tuplas en lo adelante). A partir de esta estructura y en base 
 al esquema de definición general se buscó poder determinar esquemas específicos para cada deporte que se fuera a incluir en el 
 sistema. Cada uno de estos esquemas específicos son los que se encargan de definir un deporte de forma individual dentro del sistema.
+Luego se realiza una propuesta general de diseño para concebir los modelos generadores de un deporte.
     
-    La segunda parte del trabajo consistió en construir en base a la propuesta, un esquema y su modelo correspondiente para generar 
+    En segunda instancia, se construye, en base a la propuesta, un esquema y su modelo correspondiente para generar 
 resúmenes de partidos de fútbol. Lo mismo se realizó con un deporte de naturaleza diferente como el boxeo.
 
 \section{Propuesta de Esquema General}
@@ -83,9 +84,7 @@ cuatro-tuplas de conocimiento.
 
     Cada cuatro-tupla tiene en la primera posición el tipo de entrada. El resto de los valores constituyen la base de información. Con cada tipo de entrada 
 se encapsula un subconjunto de la información que se muestra, común al conjunto de deportes estudiados. 
-    A partir del meta esquema general, es posible definir los esquemas específicos de cada deporte, con sus tipos particulares para cada entrada y su forma de interpretar 
-cada uno de los valores. Los esquemas de cada deporte tienen que ser capaces de poder expresar la información del mismo para poder, a través de ella, 
-generar textos que describan el enfrentamiento. \\
+    \\
 
 %\pagebreak
 
@@ -116,7 +115,9 @@ generar textos que describan el enfrentamiento. \\
             \end{itemize}
     \end{itemize}
 
-   
+   A partir del meta esquema general es posible definir el diseño de los esquemas específicos de cada deporte, con sus tipos particulares para cada entrada y su forma de interpretar 
+cada uno de los valores. Los esquemas de cada deporte tienen que ser capaces de expresar la información del mismo y, a través de ella, 
+generar textos que describan el enfrentamiento. 
 
 %A continuación se presenta la definición para dos deportes de naturaleza y estructura muy dispar: el fútbol y 
 %el boxeo.
@@ -131,11 +132,11 @@ esquemas específicos para un mismo deporte. Esto depende de cómo cada modelo s
 
     La representación de un deporte en un esquema específico a partir del esquema general propuesto necesita del análisis de sus características. 
 Se debe realizar un estudio que permita detallar las situaciones que presenta el deporte y representarlas basado en eventos. A partir de 
-estudiar las reglamentaciones, se separa al deporte en cuanto a su categoría: individual o colectivo. 
+estudiar las reglamentaciones se separa al deporte en cuanto a su categoría: individual o colectivo. 
 
     Para los deportes colectivos la expresión de los roles de los deportistas se encuentra mínimamente definida a partir del concepto de 
-alineación. Esta serie de deporte tiene un conjunto de individuos que inician las disputas de los encuentros y otros que ingresan a raíz de decisiones 
-que se toman durante el transcurso del evento. Además, se pueden expresar conceptos como las disposiciones que ocupa cada deportista dentro del equipo. En este 
+alineación. Esta serie de deportes tienen un conjunto de individuos que inician las disputas de los encuentros y otros que ingresan a raíz de decisiones 
+que se toman durante el transcurso de los mismos. Además, se pueden expresar conceptos como las disposiciones que ocupa cada deportista dentro del equipo. En este 
 tipo de información, la \textit{entidad complementaria} que define la tupla de \textit{ROLENJUEGO} sería el equipo del deportista.
     En el caso de los deportes individuales, los roles no se expresan tan claramente. Aun así, es posible identificar roles de representación, ya sea de un 
 país, una delegación, un equipo multi categoría. Un ejemplo fuera de los deportes de enfrentamiento se encuentra en la fórmula 1, donde los competidores 
@@ -149,12 +150,84 @@ lograr una expresión identificativa que sea única para cada una.
     La expresión de los eventos es la que dota principalmente de capacidad descriptiva a los modelos. Los eventos, acciones que se suceden en un deporte, son la esencia de 
 este y por esa razón son la información fundamental que sobre ellos se transmite, más allá del resultado. Para expresar los eventos es necesario en primera instancia determinar cuáles 
 son los que existen dentro de la modalidad seleccionada. A partir de esto, definir si para su expresión es necesario el concepto de antagonista como sujeto no protagonista en la acción.
-También se debe determinar una expresión temporal que identifique de forma única y cronológica la secuencia de eventos. De esta forma, no se generan ambigüedades a la hora de que los 
+También se debe determinar una expresión temporal que identifique de forma única y cronológica la secuencia de eventos. De esta forma no se generan ambigüedades a la hora de que los 
 modelos interpreten los mismos.
 
-    Los datos referentes a la sede, el público, el torneo, el resultado y las categorías se expresan de forma más directa. Queda en decisión del realizador del esquema y su modelo específico, 
+    Los datos referentes a la sede, el público, el torneo, el resultado y las categorías se expresan de forma más directa. Queda en decisión del realizador del esquema y su modelo específico 
 determinar qué informaciones constituyen un requerimiento en el contexto de la generación del resumen y cuáles son complementos informativos. Es decir, el modelo sería capaz de lidiar con 
 la ausencia de determinados datos. 
 
+
+\section{Propuesta de diseño para los modelos generadores}
+
+    A partir de la definición de un esquema para la conformación de las tuplas de conocimiento de un deporte determinado se debe concebir 
+un modelo que transforme esa entrada en un resumen textual. En la sección se propone un enfoque adaptable para los modelos de generación siguiendo 
+los requerimientos de los sistemas de GLN y las propuestas presentes en la literatura para idiomas distintos al español.
+
+    Como paso previo necesario para la conversión de los datos en resúmenes textuales se define qué información es relevante a 
+incluir en la salida y bajo qué estructura. Como los enfrentamientos deportivos son eventos repetitivos, cuyo conocimiento está bien 
+definido, el enfoque basado en corpus es adaptable para la planificación del contenido. Reiter y Dale \brackcite{reiter_dale_2000} plantearon que tras 
+el análisis de un conjunto de textos que aborden el dominio es posible determinar la estructura subyacente, así como la información relevante a incluir. 
+En los reportes deportivos es posible identificar una estructura con una presentación, donde se incluye el resultado e información general, 
+seguido de una mención de los eventos de mayor importancia. 
+
+
+\begin{figure}[!]
+    \begin{center}
+        \includegraphics[scale=0.9]{Graphics/arquitecturatesisOKFINAL.png}
+    \end{center}
+    \caption{Arquitectura de modelo propuesta}
+    \label{arquitecturadelmodeloOK}
+\end{figure}
+
+    La arquitectura general planteada se presenta en \ref{arquitecturadelmodeloOK} y constituye una 
+adaptación de la propuesta de Aires \brackcite{aires2016automatic} que a su vez sigue un enfoque basado en la propuesta de Theune y col. \brackcite{theune2001data}. 
+A diferencia de las mismas, el sistema propuesto no consume bases de conocimiento específicas, ya que busca adaptarse al hecho general del deporte a
+abordar. Un sistema sencillo para generar expresiones de referencia se incluye con el objetivo de que los modelos generen un texto más fluido.
+
+    Como se analizó en el capítulo anterior (\ref{chapter:state-of-the-art}), las tareas de los sistemas de generación de texto a partir de datos se pueden dividir en 
+dos etapas: la referente al contenido a representar y su estructura (planificación del contenido) y la de realización lingüística. La planificación del contenido 
+viene dada por la estructura extraída de los textos analizados. Para la etapa de realización, se propone un sistema basado en reglas y plantillas.
+
+    \subsubsection{Realización lingüística}
+ 
+    En la etapa de realización del texto se ven unificadas las tareas de carácter lingüístico tal y como se presentó en \ref{chapter:state-of-the-art}. 
+En este proceso se determinan las palabras y expresiones con las que exponer el contenido seleccionado bajo la estructura definida. El enfoque basado en reglas 
+y llenado de plantilla es de los más utilizados por el control que otorga sobre la producción del texto (\ref{subsection:lexicalizacion}). Tiene la ventaja de que 
+se asegura la calidad estructural del texto producido, así como permite dotar de variabilidad a las salidas tal y como se discutió en el capítulo 
+anterior (\ref{subsection:realizcion}).
+
+    Las plantillas se utilizan dentro del modelo para conformar estructuras más complejas en forma de oraciones. Cada conjunto 
+de plantillas dentro del sistema pertenece a una parte de la estructura del texto. Para cada contexto se conciben varias plantillas que brindan opciones para expresar la información relativa a una idea.
+
+    Las plantillas pueden o no presentar ranuras para completar con información. Las ranuras se utilizan de la forma: \textit{$<$ dato $>$} donde 
+\textit{dato} se sustituye por el valor de la variable que representa. Para dotar de facilidad al sistema a la hora de adaptarse a eventos de 
+ambos géneros, se puede utilizar dentro de las plantillas expresiones como \textit{\$ expresión dependiente del género \$}, donde \textit{“expresión dependiente del género” }
+se sustituye por su expresión de género correcta dentro del contexto a través de una de las funciones léxicas. El caracter “@” también se utiliza dentro de las plantillas 
+para hacer distinciones de género. Por ejemplo en la frase: \textit{amb@s se golpearon}, el “@” se sustituye por “a” o por “o” en dependencia del género.
+\\
+
+\textbf{Funciones lingüísticas}\\
+
+    Las funciones lingüísticas tienen el objetivo de mejorar la calidad del texto producido. Asimismo, buscan asegurar su correcta estructura gramatical. Una vez constituida una oración a partir de unificar plantillas de expresiones, una función se encarga de dotar de un 
+formato a la misma. Se colocan las mayúsculas correspondientes al inicio, así como los puntos finales. Otra función se emplea para eliminar errores gramaticales o de 
+estructura que se presentan durante la unión de las plantillas. Se eliminan los espacios en blanco múltiples, se corrigen los signos de puntuación así como los artículos 
+repetidos y las construcciones mal formadas, como por ejemplo “de el”.
+
+Otras funciones léxicas se utilizan para dar mayor fluidez al texto, como las que transforman expresiones numéricas en texto, por ejemplo, “3” por “tres”.
+\\
+
+\textbf{Generador de expresiones de referencia}\\
+
+Las expresiones de referencia son las que permiten identificar unívocamente a una entidad dentro de un contexto \brackcite{reiter_dale_2000,Gatt2018SurveyOT}. 
+Un sistema de expresiones de referencia debe determinar si la entidad a referenciar ha sido mencionada previamente, ya que existe una diferenciación entre la 
+introducción de una entidad y su referencia tardía, tal y como se trató en el capítulo anterior (\ref{subsection:expreferencia}). A su vez, la expresión seleccionada 
+para referirse a una entidad debe tener en cuenta el resto de entidades del dominio. Por ejemplo, en un evento donde “Alejandro González” y “Pedro González” sean 
+protagonistas, la expresión “González” resulta ambigua. Se propone un generador de expresiones de referencia basado en los nombres propios de los integrantes del 
+enfrentamiento, utilizando los apellidos como referencias tardías y el nombre completo en la introducción.
+
+
+
+    
 
 

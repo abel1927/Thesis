@@ -28,40 +28,45 @@ texto a partir de datos\footnote[2]{https://www.washingtonpost.com/pr/wp/2017/09
 En este caso, su sistema se apoda \textit{Heliograf} y les permite cubrir todos los partidos de fútbol americano de las escuelas secundarias del área de Washington DC 
 cada semana.\\
 
-       \textbf{Problema}\\
+    \textbf{Motivaciones}\\
 
-    Aún con el desarrollo de los sistemas de GLN y su mayor asimilación en diversos ámbitos, siguen siendo absolutamente predominantes los 
-sistemas que tienen el inglés como idioma de referencia a la hora de generar el texto de salida. En la literatura consultada no abundan las soluciones 
-en lenguaje español en este campo, entre otras razones influenciado por la mayor complejidad estructural del español como lenguaje, así como el menor número 
-de herramientas específicas para éste. De la misma forma ésto impacta directamente en los sistemas que tienen como objetivo comunicativo los eventos deportivos. Siendo el deporte un objeto de mucho interés en la 
-comunidad hispanohablante en general y en Cuba en particular, se hace necesario ampliar los escenarios existentes desde esta perspectiva.
-
-    Los sistemas analizados en la literatura consultada en su mayoría se basan en un conocimiento explícito del dominio a tratar así como en una 
-estructuración predefinida de los datos en base al dominio. A su vez, son muchas las propuestas que parten de la obtención de los datos desde 
-la fuente como parte propia del sistema y no propiciados por el usuario. Son pocos los sistemas funcionales, fuera de la industria, capaces de 
-desacoplarse de las fuentes de datos y de abarcar desde una misma estructura distintos dominios.\\
-
-    %Los modelos neuronales están impactando el estado del arte de muchas tareas en el campo del PLN. Se hace necesario 
-%acercar el prisma hacia los mismos desde el punto de vista de la GLN.\\
-
-   \textbf{Motivaciones}\\
-
-    A partir del problema existente y las perspectivas que se abren en el campo de la GLN, surge la motivación del presente trabajo. Siendo el deporte un campo 
+    A partir de las perspectivas que se abren en el campo de la GLN, surge la motivación del presente trabajo. Siendo el deporte un campo 
 que despierta tanto interés y que es fuente de entretenimiento de muchas personas, sentar las bases del diseño de un sistema para la generación de resúmenes en español de 
 eventos deportivos es un reto estimulante. Por su carácter estadístico y su gran audiencia, el deporte es una de las esferas que se puede beneficiar claramente del desarrollo de los sistemas 
 de generación automática de texto. Muchos trabajos se han enfocado en este tema \brackcite{theune2001data, van2017pass, gunasiri2021automated}. Y aunque es relativamente sencillo encontrar en la web 
 los datos o tablas estadísticas de un determinado enfrentamiento deportivo, la gran variedad de eventos que se suceden constantemente hacen 
 que sea humanamente imposible darle cobertura a cada uno de ellos a nivel de narración y resumen. Por esta razón es motivante desarrollar  sistemas que sean capaces de cubrir muchas esferas del deporte.\\
-Asímismo este trabajo se presenta en el marco de las líneas de investigación existentes en el 
-grupo de Inteligencia Artificial de la Facultad de Matemática y Computación de la Universidad de La Habana (MATCOM) y puede servir de base para futuros trabajos que sigan ampliando y profundizando en la GLN.\\
+Asimismo, este trabajo se presenta en el marco de las líneas de investigación existentes en el grupo de Inteligencia Artificial de la Facultad de Matemática y Computación de la 
+Universidad de La Habana (MATCOM) y puede servir de base para futuros trabajos que sigan ampliando y profundizando en la GLN.\\
 
 
     \textbf{Antecedente}\\
 
-    La intención de adentrarse en la investigación de los sitemas de GLN dentro del departamento de IA de MATCOM comenzó con la propuesta, en 2019, 
+    La intención de adentrarse en la investigación de los sistemas de GLN dentro del departamento de IA de MATCOM comenzó con la propuesta, en 2019, 
 de realizar un modelo GLN capaz de dar cobertura a las actuaciones destacadas de los peloteros cubanos en las Grandes Ligas de Béisbol. La misma derivó 
 en el trabajo de tesis de Roberto Balboa González \brackcite{balboa2020}. Este primer acercamiento a la GLN sirvió para buscar nuevos escenarios a abarcar 
-desde el punto de vista de esta disciplina. %El resto de los antecedentes vienen enmarcados en el estudio de la literatura y de los sistemas existentes dentro del campo de la GLN que 
+desde el punto de vista de esta disciplina.\\
+
+
+       \textbf{Problemática}\\
+
+    Aún con el desarrollo de los sistemas de GLN y su mayor asimilación en diversos ámbitos, siguen siendo absolutamente predominantes los 
+sistemas que tienen el inglés como idioma de referencia a la hora de generar el texto de salida. En la literatura consultada no abundan las soluciones 
+en lenguaje español en este campo, entre otras razones influenciado por la gran complejidad estructural de este lenguaje, así como el menor número 
+de herramientas específicas para este. De la misma forma esto impacta directamente en los sistemas que tienen como objetivo comunicativo los eventos deportivos. Siendo el deporte un objeto de mucho interés en la 
+comunidad hispanohablante en general y en Cuba en particular, se hace necesario ampliar los escenarios existentes desde esta perspectiva.
+
+    Los sistemas analizados en la literatura consultada en su mayoría se basan en un conocimiento explícito del dominio a tratar así como en una 
+estructuración predefinida de los datos en base al dominio. A su vez, son muchas las propuestas que parten de la obtención de los datos desde 
+la fuente como parte propia del sistema y no propiciados por el usuario. Son pocos los sistemas funcionales, fuera de la industria, capaces de 
+desacoplarse de las fuentes de datos y de abarcar, desde una misma estructura de entrada de los datos, distintos dominios.\\
+
+    %Los modelos neuronales están impactando el estado del arte de muchas tareas en el campo del PLN. Se hace necesario 
+%acercar el prisma hacia los mismos desde el punto de vista de la GLN.\\
+
+   
+
+     %El resto de los antecedentes vienen enmarcados en el estudio de la literatura y de los sistemas existentes dentro del campo de la GLN que 
 %se presentan en un capítulo posterior.%
 
 %A pesar de los avances indiscutibles en el campo de la GLN queda aún mucho por hacer. Se considera que es interesante ampliar los sistemas que den cobertura informativa a los eventos 
@@ -69,8 +74,8 @@ desde el punto de vista de esta disciplina. %El resto de los antecedentes vienen
 %grupo de IA de MATCOM como antesala de futuras investigaciones y aplicaciones.
 
 
-Teniendo en cuenta estos antecedentes, y partiendo de la hipótesis de que es posible definir un esquema general para representar los datos que describen los enfrentamientos deportivos,
-se arriba al objetivo del presente trabajo.\\
+Teniendo en cuenta los antecedentes, las problemáticas, y partiendo de la hipótesis de que es posible definir un esquema general para representar los 
+datos que describen los enfrentamientos deportivos, se arriba al objetivo del presente trabajo.\\
 
 %se presenta un prototipo de sistema capaz de generar resúmenes de eventos deportivos a partir de los datos prove\'idos por 
 %el usuario. Se utiliza el futbol y el boxeo como muestras para validar la propuesta. 
@@ -94,7 +99,7 @@ independiente de la fuente de datos del dominio.
         %\item Estudiar la literatura relacionada con la GLN y determinar los enfoques factibles.
         \item Analizar el dominio y determinar características comunes y relevantes de los eventos deportivos.
         \item Crear un esquema general a partir del cual poder definir esquemas específicos para la entrada de datos de los distintos deportes.
-        \item Diseñar un sistema para la generación de resúmenes.
+        \item Proponer un diseño general para los modelos de generación de resúmenes.
         \item Validar la propuesta con dos modelos de generación de texto basados en reglas y plantillas para el fútbol y el boxeo.   
     \end{itemize}
 
@@ -111,8 +116,10 @@ independiente de la fuente de datos del dominio.
     \textbf{Estructura del trabajo}\\
 
     El resto del trabajo se organiza de la siguiente manera. El capítulo 1 aborda los problemas generales de los sistemas de GLN 
-y las distinas técnicas relevantes en la literatura para su solución. En el capítulo 2 se presenta la propuesta de meta esquema para la 
-representación de los datos de entrada y la metodología para definir los esquemas específicos. En el capítulo 4 se presenta la validación
-de la propuesta a través del resultado de los modelos generadores para el fútbol y el boxeo. Mientras 
-en el capítulo 4 se analizan los detalles de la implementación. El trabajo concluye con la presentación de las 
-conclusiones y recomendaciones.
+y las distintas técnicas relevantes en la literatura para su solución. En el capítulo 2 se presenta la propuesta de meta esquema para la 
+representación de los datos de entrada, la metodología para definir los esquemas específicos, así como la propuesta de diseño para la 
+general de los modelos de generación de resúmenes. En el capítulo 4 se presenta la validación
+de la propuesta a través de la exposición de los esquemas de definición y los modelos generadores para el fútbol y el boxeo. 
+Mientras en el capítulo 4 se analizan los detalles de la implementación del prototipo de sistema creado y se muestran los resultados 
+textuales de los modelos tratados en el capítulo 3. El trabajo concluye con la presentación de las 
+conclusiones y recomendaciones, así como la bibliografía consultada.
